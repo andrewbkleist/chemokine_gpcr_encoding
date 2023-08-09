@@ -3,6 +3,6 @@ navbar:
   title: "My Website"
   left:
     - text: "Home"
-      href: https://github.com/andrewbkleist/chemokine_gpcr_encoding/tree/main/docs/_site/index.html
+      href: index.html
     - text: "About"
-      href: https://github.com/andrewbkleist/chemokine_gpcr_encoding/tree/main/docs/_site/about.html
+      href: about.html
