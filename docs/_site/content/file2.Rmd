@@ -1,0 +1,9 @@
+---
+title: "File 2"
+output:   
+  html_document: 
+    df_print: paged
+    code_download: true
+---
+
+This is my second file.
