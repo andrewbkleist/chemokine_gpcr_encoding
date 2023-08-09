@@ -7,6 +7,14 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
+    - text: "Readings"
+      href: readings.html 
+      menu:
+      - text: "Module 1"
+        href: readings-module1.html
+      - text: "Module 2"
+        href: readings-module2.html
+
 output:
   html_document:
     theme: cosmo
