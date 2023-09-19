@@ -1,0 +1,15 @@
+---
+title: "README"
+author: "andrewbkleist"
+date: "2023-08-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+#### **Description of ~/code/01_variant_analysis**
+Code in this folder imports and analyzes data from Bihler, e
