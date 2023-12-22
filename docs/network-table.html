@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>network-table.knit</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-17.0.0/react.min.js"></script>
+<script src="site_libs/react-17.0.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet" />
+<script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    interaction network
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="network-viewer.html">network viewer</a>
+    </li>
+    <li>
+      <a href="network-table.html">network evidence</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    common numbering
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="chemokine-numbering.html">common chemokine numbering (CCN)</a>
+    </li>
+    <li>
+      <a href="gpcr-numbering.html">common chemokine receptor numbering (CRN)</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    unstructured regions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="chemokine-nterm.html">chemokine N-terminus</a>
+    </li>
+    <li>
+      <a href="gpcr-nterm.html">GPCR N-terminus</a>
+    </li>
+    <li>
+      <a href="gpcr-ecl2.html">GPCR ECL2</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    variant mapping
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tcga.html">The Cancer Genome Atlas</a>
+    </li>
+    <li>
+      <a href="gnomad.html">GnomAD</a>
+    </li>
+    <li>
+      <a href="geneatlas.html">GeneATLAS</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<div id="chemokine-gpcr-interaction-network-evidence"
+class="section level2">
+<h2>chemokine-GPCR <strong>interaction network</strong> evidence</h2>
+<p><br></p>
+<div
+id="the-table-below-is-reproduced-from-supplementary-table-1.xlsx-associated-with-the-manuscript.-it-compiles-evidence-for-chemokine-gpcr-interactions-from-the-literature-including-evidence-supporting-an-interaction-as-well-as-evidence-aginst-an-interaction."
+class="section level4">
+<h4>The table below is reproduced from <strong>“Supplementary Table
+1.xlsx”</strong> associated with the manuscript. It compiles evidence
+for chemokine-GPCR interactions from the literature, including evidence
+supporting an interaction as well as evidence aginst an
+interaction.</h4>
+<p><br></p>
+</div>
+<div id="summary-statistics" class="section level4">
+<h4>Summary statistics:</h4>
+<ul>
+<li><h4
+id="the-number-of-unique-chemokine-gpcr-evidence-entries-is-524">The
+number of unique chemokine-GPCR-evidence entries is
+<strong>524</strong></h4></li>
+<li><h4
+id="the-number-of-unique-chemokine-gpcr-pairings-considered-including-positive-negative-interactions-is-371-of-a-total-of-1058-possible-pairings-or-35-of-all-possible-chemokine-gpcr-pairings">The
+number of unique chemokine-GPCR <strong>pairings</strong> considered
+(including <strong>positive</strong> &amp; <strong>negative</strong>
+interactions) is 371 of a total of 1058 possible pairings, or
+<strong>35%</strong> of all possible chemokine-GPCR pairings</h4></li>
+<li><h4
+id="the-number-of-positive-chemokine-gpcr-interactions-for-which-evidence-was-gathered-is-139-which-is-13-of-all-possible-chemokine-gpcr-pairings">The
+number of <strong>positive</strong> chemokine-GPCR interactions for
+which evidence was gathered is 139 which is <strong>13%</strong> of all
+possible chemokine-GPCR pairings</h4></li>
+<li><h4
+id="the-number-of-negative-chemokine-gpcr-interactions-for-which-evidence-was-gathered-is-228-which-is-22-of-all-possible-chemokine-gpcr-pairings">The
+number of <strong>negative</strong> chemokine-GPCR interactions for
+which evidence was gathered is 228 which is <strong>22%</strong> of all
+possible chemokine-GPCR pairings</h4></li>
+<li><h4 id="the-number-of-unique-literature-sources-is-114">The number
+of unique literature <strong>sources</strong> is
+<strong>114</strong></h4></li>
+</ul>
+<p><br></p>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-73e4ded3c6ace1a10763" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-73e4ded3c6ace1a10763">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"chemokine":["CCL1","CCL1","CCL1","CCL1","CCL1","CCL1","CCL1","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL2","CCL3L1","CCL3L1","CCL3L1","CCL3L1","CCL3L1","CCL3L1","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL3","CCL2","CCL2","CCL3","CCL3","CCL3","CCL3","CCL3","CCL4L1","CCL4L1","CCL4L1","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL4","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL5","CCL4","CCL5","CCL5","CCL5","CCL7","CCL7","CCL7","CCL7","CCL7","CCL7","CCL7","CCL7","CCL7","CCL7","CCL7","CCL7","CCL7","CCL7","CCL7","CCL7","CCL8","CCL8","CCL8","CCL8","CCL8","CCL8","CCL8","CCL8","CCL8","CCL8","CCL8","CCL8","CCL8","CCL11","CCL11","CCL11","CCL11","CCL11","CCL11","CCL11","CCL11","CCL11","CCL11","CCL11","CCL11","CCL11","CCL13","CCL13","CCL13","CCL13","CCL13","CCL13","CCL13","CCL13","CCL13","CCL13","CCL13","CCL13","CCL13","CCL14","CCL14","CCL14","CCL14","CCL14","CCL14","CCL14","CCL14","CCL14","CCL14","CCL14","CCL14","CCL14","CCL15","CCL15","CCL15","CCL15","CCL15","CCL15","CCL15","CCL15","CCL15","CCL15","CCL16","CCL16","CCL16","CCL16","CCL16","CCL16","CCL16","CCL16","CCL16","CCL16","CCL16","CCL16","CCL16","CCL16","CCL16","CCL16","CCL16","CCL16","CCL16","CCL17","CCL17","CCL17","CCL17","CCL17","CCL17","CCL17","CCL17","CCL17","CCL17","CCL17","CCL17","CCL17","CCL18","CCL18","CCL18","CCL18","CCL18","CCL18","CCL18","CCL18","CCL18","CCL18","CCL18","CCL18","CCL18","CCL19","CCL19","CCL19","CCL19","CCL19","CCL19","CCL19","CCL19","CCL19","CCL19","CCL19","CCL19","CCL19","CCL19","CCL19","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL20","CCL21","CCL21","CCL21","CCL21","CCL21","CCL21","CCL21","CCL21","CCL21","CCL21","CCL21","CCL21","CCL22","CCL22","CCL22","CCL22","CCL22","CCL22","CCL22","CCL22","CCL22","CCL22","CCL22","CCL23","CCL23","CCL23","CCL23","CCL23","CCL23","CCL24","CCL24","CCL24","CCL24","CCL24","CCL25","CCL25","CCL25","CCL25","CCL25","CCL25","CCL25","CCL25","CCL25","CCL25","CCL26","CCL26","CCL26","CCL26","CCL26","CCL26","CCL26","CCL26","CCL26","CCL26","CCL26","CCL26","CCL26","CCL26","CCL26","CCL26","CCL26","CCL26","CCL27","CCL27","CCL27","CCL27","CCL28","CCL28","CCL28","CCL28","CCL28","CXCL1","CXCL1","CXCL1","CXCL1","CXCL1","CXCL1","CXCL1","CXCL1","CXCL1","CXCL1","CXCL1","CXCL2","CXCL2","CXCL2","CXCL2","CXCL2","CXCL2","CXCL3","CXCL3","CXCL3","CXCL3","CXCL4L1","CXCL4","CXCL4","CXCL4","CXCL4","CXCL4","CXCL4","CXCL4","CXCL4","CXCL4","CXCL5","CXCL5","CXCL5","CXCL5","CXCL5","CXCL5","CXCL6","CXCL6","CXCL6","CXCL6","CXCL7","CXCL7","CXCL7","CXCL7","CXCL7","CXCL7","CXCL7","CXCL7","CXCL8","CXCL8","CXCL8","CXCL8","CXCL8","CXCL8","CXCL8","CXCL8","CXCL8","CXCL8","CXCL8","CXCL8","CXCL8","CXCL8","CXCL8","CXCL8","CXCL8","CXCL9","CXCL9","CXCL9","CXCL9","CXCL9","CXCL9","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL10","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL11","CXCL12","CXCL12","CXCL12","CXCL12","CXCL12","CXCL12","CXCL12","CXCL12","CXCL13","CXCL13","CXCL13","CXCL13","CXCL13","CXCL13","CXCL13","CXCL13","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL14","CXCL16","CXCL16","CXCL17","CXCL17","CXCL17","CXCL17","CXCL17","CXCL17","CXCL17","CX3CL1","CX3CL1","CX3CL1","CX3CL1","XCL1","XCL1","XCL1","XCL2","XCL2"],"gpcr":["CCR6","CCR8","CCR8","ACKR1","ACKR2","ACKR4","ACKR4","CCR1","CCR1","CCR2","CCR2","CCR2","CCR2","CCR3","CCR3","CCR4","CCR4","CCR4","CCR5","CCR5","CCR5","CCR6","CCR6","CCR7","CXCR1","CXCR2","CXCR3","ACKR1","ACKR2","ACKR2","ACKR2","ACKR4","CCR1","CCR1","CCR3","CCR5","CCR5","ACKR2","CCR1","CCR1","CCR1","CCR1","CCR1","CCR2","CCR2","CCR2","CCR3","CCR3","CCR3","CCR4","CCR4","CCR4","CCR4","CCR5","CCR5","CCR5","CCR6","CCR6","CCR7","CXCR1","CXCR2","CXCR3","ACKR1","ACKR2","ACKR2","ACKR4","CCR1","CCR3","CCR5","CCR1","CCR1","CCR1","CCR2","CCR2","CCR2","CCR3","CCR4","CCR4","CCR5","CCR5","CCR6","CCR6","CCR7","CCR8","CXCR3","ACKR1","ACKR2","ACKR2","ACKR4","CCR1","CCR1","CCR1","CCR1","CCR2","CCR2","CCR2","CCR3","CCR3","CCR4","CCR4","CCR5","CCR5","CCR6","CCR6","CCR7","CXCR3","CXCR3","ACKR1","ACKR1","ACKR1","ACKR2","ACKR2","ACKR2","ACKR4","CCR1","CCR1","CCR2","CCR2","CCR3","CCR3","CCR4","CCR5","CCR5","CCR7","CXCR3","ACKR1","ACKR2","ACKR2","ACKR2","ACKR4","CCR1","CCR1","CCR2","CCR2","CCR3","CCR3","CCR3","CCR5","CCR7","ACKR1","ACKR2","ACKR2","ACKR4","CCR1","CCR2","CCR2","CCR2","CCR3","CCR5","CCR6","CXCR3","CXCR3","ACKR1","ACKR2","ACKR2","ACKR4","CCR1","CCR2","CCR2","CCR3","CCR3","CCR4","CCR5","CCR5","CXCR3","CXCR3","ACKR1","ACKR2","ACKR4","CCR1","CCR1","CCR1","CCR2","CCR3","CCR3","CCR4","CCR5","CCR6","CXCR1","ACKR1","ACKR2","ACKR4","CCR1","CCR1","CCR2","CCR3","CCR3","CCR5","CCR6","CXCR1","CXCR2","ACKR4","CCR1","CCR1","CCR1","CCR2","CCR2","CCR3","CCR4","CCR5","CCR6","CCR7","CCR8","CCR8","CCR8","CCR9","CXCR5","XCR1","CX3CR1","ACKR1","ACKR4","CCR1","CCR2","CCR3","CCR4","CCR5","CCR6","CCR7","CCR8","CCR8","ACKR1","ACKR2","ACKR2","ACKR4","CCR1","CCR2","CCR3","CCR3","CCR4","CCR5","CCR7","CCR8","CCR9","CXCR3","CXCR5","ACKR1","ACKR4","CCR1","CCR2","CCR3","CCR4","CCR5","CCR6","CCR7","CCR9","CXCR3","ACKR1","ACKR2","ACKR4","ACKR4","ACKR4","CCRL2","CCR1","CCR2","CCR3","CCR4","CCR4","CCR5","CCR6","CCR6","CCR6","CCR7","CCR7","CCR9","CXCR3","CXCR5","CX3CR1","ACKR1","ACKR2","ACKR3","ACKR4","ACKR4","CCR1","CCR2","CCR3","CCR4","CCR5","CCR6","CCR7","ACKR1","ACKR4","ACKR4","ACKR4","CCRL2","CCR1","CCR2","CCR3","CCR4","CCR5","CCR6","CCR7","ACKR1","ACKR2","ACKR2","ACKR4","CCR1","CCR1","CCR2","CCR5","ACKR1","ACKR4","CCR2","CCR3","CCR3","CXCR3","ACKR4","CCR1","CCR4","CCR5","CCR6","CCR6","CCR9","ACKR1","ACKR4","ACKR4","ACKR4","CCR1","CCR2","CCR2","CCR3","CCR3","CCR4","CCR5","CCR6","CCR7","CCR8","CXCR1","CXCR2","CXCR3","CXCR3","CXCR4","CX3CR1","ACKR2","ACKR4","CCR10","CCR10","ACKR1","ACKR4","CCR3","CCR10","CCR10","CCR10","ACKR4","CCR2","CCR6","CXCR1","CXCR1","CXCR2","CXCR2","CXCR3","ACKR1","ACKR1","ACKR2","ACKR4","CXCR1","CXCR2","ACKR1","ACKR2","ACKR2","ACKR4","CXCR1","CXCR2","ACKR2","ACKR4","CXCR3","CCR1","CCR1","CXCR3","CXCR3","CXCR3","CXCR3","ACKR1","ACKR1","ACKR4","CXCR1","CXCR2","ACKR1","ACKR1","ACKR1","ACKR4","CXCR1","CXCR2","ACKR1","ACKR4","CCR6","CXCR1","CXCR1","CXCR1","CXCR1","CXCR3","ACKR1","ACKR4","CCR1","CCR2","CCR2","CCR2","CCR2","CCR3","CCR6","CXCR1","CXCR1","CXCR2","CXCR2","CXCR3","ACKR1","ACKR1","ACKR1","ACKR2","ACKR4","CCR3","CCR3","CXCR3","CXCR3","ACKR1","ACKR4","CCR1","CCR2","CCR3","CCR3","CCR3","CCR4","CCR5","CCR6","CCR6","CCR7","CCR8","CCR9","CCR10","CXCR1","CXCR2","CXCR3","CXCR4","CXCR5","CXCR6","XCR1","CX3CR1","ACKR1","ACKR2","ACKR2","ACKR4","CCR1","CCR2","CCR3","CCR3","CCR4","CCR5","CCR5","CCR6","CCR7","CCR8","CXCR1","CXCR2","CXCR3","CXCR4","CXCR5","XCR1","CX3CR1","ACKR1","ACKR3","ACKR3","ACKR4","CXCR3","CXCR4","CXCR4","ACKR1","ACKR1","ACKR3","ACKR3","ACKR4","CCR5","CCR7","CXCR3","CXCR5","CXCR5","ACKR1","ACKR4","ACKR4","CCR1","CCR2","CCR3","CCR4","CCR5","CCR5","CCR6","CCR7","CCR7","CCR8","CCR9","CCR10","CXCR1","CXCR2","CXCR3","CXCR4","CXCR4","CXCR4","CXCR4","CXCR4","CXCR5","CXCR5","CXCR6","XCR1","CX3CR1","ACKR2","ACKR3","ACKR4","ACKR4","CXCR6","CXCR6","CCR2","CXCR3","CXCR4","GPR35","GPR35","ACKR3","ACKR4","CCR6","CX3CR1","ACKR1","ACKR4","XCR1","ACKR1","ACKR4","XCR1","ACKR4"],"author_date_journal":["Power, et al. 1995. J Bio Chem","Roos, et al. 1997. J Biol Chem","Tiffany, et al. 1997. J Exp Med","Gardner, et al. 1994. Biochem Biophys Res Commun","Bonecchi, et al. 2004. J Immunol","Gosling, et al. 2000. J Immunol","Meyrath, et al. 2021. J Leukoc Biol","Myers, et al. 1995. J Biol Chem","Combadiere, et al. 1995. J Biol Chem","Myers, et al. 1995. J Biol Chem","Parody, et al. 2004. Cytokine","Charo, et al. 1994. Proc Natl Acad Sci USA","Ogilvie, et al. 2003. Blood","Parody, et al. 2004. Cytokine","Daugherty, et al. 1996. J Exp Med","Power, et al. 1995. J Bio Chem","Imai, et al. 1998. J Biol Chem","Imai, et al. 1997. J Biol Chem","Samson, et al. 1997. J Biol Chem","Raport, et al. 1996. J Biol Chem","Blanpain, et al. 1999. Blood","Power, et al. 1995. J Bio Chem","Baba, et al. 1997. J Biol Chem","Yoshida, et al. 1997. J Biol Chem","Ahuja, et al. 1996. J Biol Chem","Ahuja, et al. 1996. J Biol Chem","Weng, et al. 1998. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Nibbs, et al. 1997. J Biol Chem","Bonecchi, et al. 2004. J Immunol","Szpakowska, et al. 2023. Front Immunol","Meyrath, et al. 2021. J Leukoc Biol","Proost, et al. 2000. Blood","Struyf, et al. 2001. Eur J Immunol","Struyf, et al. 2001. Eur J Immunol","Struyf, et al. 2001. Eur J Immunol","Proost, et al. 2000. Blood","Bonecchi, et al. 2004. J Immunol","Combadiere, et al. 1995. J Biol Chem","Neote, et al. 1993. Cell","Petkovic, et al. 2004. J Biol Chem","Myers, et al. 1995. J Biol Chem","Detheux, et al. 2000. J Exp Med","Charo, et al. 1994. Proc Natl Acad Sci USA","Myers, et al. 1995. J Biol Chem","Uguccioni, et al. 1997. J Clin Invest","Daugherty, et al. 1996. J Exp Med","Uguccioni, et al. 1997. J Clin Invest","Detheux, et al. 2000. J Exp Med","Power, et al. 1995. J Bio Chem","Hoogeworf, et al. 1996. Biochem Biophys Res Commun","Imai, et al. 1998. J Biol Chem","Imai, et al. 1997. J Biol Chem","Petkovic, et al. 2004. J Biol Chem","Blanpain, et al. 1999. Blood","Detheux, et al. 2000. J Exp Med","Power, et al. 1995. J Bio Chem","Baba, et al. 1997. J Biol Chem","Yoshida, et al. 1997. J Biol Chem","Ahuja, et al. 1996. J Biol Chem","Ahuja, et al. 1996. J Biol Chem","Weng, et al. 1998. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Bonecchi, et al. 2004. J Immunol","Nibbs, et al. 1997. J Biol Chem","Meyrath, et al. 2021. J Leukoc Biol","Howard, et al. Biochem Biophys Res Commun","Howard, et al. Biochem Biophys Res Commun","Howard, et al. Biochem Biophys Res Commun","Guan, et al. J Biol Chem","Neote, et al. 1993. Cell","Chou, et al. 2002. Br J Pharmacol","Charo, et al. 1994. Proc Natl Acad Sci USA","Guan, et al. J Biol Chem","Myers, et al. 1995. J Biol Chem","Combadiere, et al. 1995. J Biol Chem","Imai, et al. 1997. J Biol Chem","Imai, et al. 1998. J Biol Chem","Guan, et al. J Biol Chem","Bondue, et al. 2002. Biochemistry","Power, et al. 1995. J Bio Chem","Baba, et al. 1997. J Biol Chem","Yoshida, et al. 1997. J Biol Chem","Garlisi, et al. 1999. Eur J Immunol","Weng, et al. 1998. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Nibbs, et al. 1997. J Biol Chem","Bonecchi, et al. 2004. J Immunol","Meyrath, et al. 2021. J Leukoc Biol","Neote, et al. 1993. Cell","Petkovic, et al. 2004. J Biol Chem","Combadiere, et al. 1995. J Biol Chem","Myers, et al. 1995. J Biol Chem","Myers, et al. 1995. J Biol Chem","Charo, et al. 1994. Proc Natl Acad Sci USA","Combadiere, et al. 1995. J Biol Chem","Daugherty, et al. 1996. J Exp Med","Wan, et al. 2002. Eur J Pharmacol","Imai, et al. 1997. J Biol Chem","Hoogeworf, et al. 1996. Biochem Biophys Res Commun","Petkovic, et al. 2004. J Biol Chem","Blanpain, et al. 1999. Blood","Power, et al. 1995. J Bio Chem","Baba, et al. 1997. J Biol Chem","Yoshida, et al. 1997. J Biol Chem","Weng, et al. 1998. J Biol Chem","D'Uonnolo, et al. 2022. Front Immunol","Horuk, et al. 1994. J Biol Chem","Szabo, et al. 1995. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Bonecchi, et al. 2004. J Immunol","Nibbs, et al. 1997. J Biol Chem","Szpakowska, et al. 2023. Front Immunol","Meyrath, et al. 2021. J Leukoc Biol","Ben-Baruch, et al. 1995. J Biol Chem","Combadiere, et al. 1995. J Biol Chem","Combadiere, et al. 1995. J Biol Chem","Huma, et al, 2017. Sci Signal","Daugherty, et al. 1996. J Exp Med","Wan, et al. 2002. Eur J Pharmacol","Imai, et al. 1998. J Biol Chem","Blanpain, et al. 1999. Blood","Mueller, et al. 2002. Br J Pharmacol","Yoshida, et al. 1997. J Biol Chem","Weng, et al. 1998. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Bonecchi, et al. 2004. J Immunol","Szpakowska, et al. 2023. Front Immunol","Nibbs, et al. 1997. J Biol Chem","Meyrath, et al. 2021. J Leukoc Biol","Gong, et al. 1997. J Biol Chem","Chou, et al. 2002. Br J Pharmacol","Huma, et al, 2017. Sci Signal","Luttichau, et al. 2003. J Biol Chem","Struyf, et al. 2009. Eur J Immunol","Heath, et al. 1997. J Clin Invest","Uguccioni, et al. 1997. J Clin Invest","Ruffing, et al. 1998. Cell Immunol","Yoshida, et al. 1997. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Nibbs, et al. 1997. J Biol Chem","Szpakowska, et al. 2023. Front Immunol","Meyrath, et al. 2021. J Leukoc Biol","Pease, et al. 1998. J Biol Chem","Ogilvie, et al. 2001. Blood","Martinelli, et al. 2001. J Biol Chem","Parody, et al. 2004. Cytokine","Daugherty, et al. 1996. J Exp Med","Blanpain, et al. 1999. Blood","Power, et al. 1995. J Bio Chem","Xanthou, et al. 2003. Eur J Immunol","Weng, et al. 1998. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Bonecchi, et al. 2004. J Immunol","Nibbs, et al. 1997. J Biol Chem","Meyrath, et al. 2021. J Leukoc Biol","Garcia-Zepeda, et al. 1996. J Immunol","Uguccioni, et al. 1997. J Clin Invest","Berchiche, et al. 2011. Mol Pharmacol","Uguccioni, et al. 1997. J Clin Invest","Wan, et al. 2002. Eur J Pharmacol","Imai, et al. 1998. J Biol Chem","Ruffing, et al. 1998. Cell Immunol","Blanpain, et al. 1999. Blood","Weng, et al. 1998. J Biol Chem","Loetscher, et al. 2001. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Nibbs, et al. 1997. J Biol Chem","Meyrath, et al. 2021. J Leukoc Biol","Chou, et al. 2002. Br J Pharmacol","Tsou, et al. 1998. J Exp Med","Detheux, et al. 2000. J Exp Med","Tsou, et al. 1998. J Exp Med","Tsou, et al. 1998. J Exp Med","Detheux, et al. 2000. J Exp Med","Tsou, et al. 1998. J Exp Med","Detheux, et al. 2000. J Exp Med","Power, et al. 1995. J Bio Chem","Tsou, et al. 1998. J Exp Med","Gardner, et al. 1994. Biochem Biophys Res Commun","Nibbs, et al. 1997. J Biol Chem","Meyrath, et al. 2021. J Leukoc Biol","Youn, et al. 1997. J Immunol","Coulin, et al. 1997. Eur J Biochem","Coulin, et al. 1997. Eur J Biochem","Coulin, et al. 1997. Eur J Biochem","Youn, et al. 1997. J Immunol","Coulin, et al. 1997. Eur J Biochem","Power, et al. 1995. J Bio Chem","Coulin, et al. 1997. Eur J Biochem","Coulin, et al. 1997. Eur J Biochem","Meyrath, et al. 2021. J Leukoc Biol","Howard, et al. 2000. Blood","Kim, et al. 2005. FEBS Lett","Nomiyama, et al. 2001. Int Immunol","Luttichau, et al. 2003. J Biol Chem","Nomiyama, et al. 2001. Int Immunol","Nomiyama, et al. 2001. Int Immunol","Nomiyama, et al. 2001. Int Immunol","Nomiyama, et al. 2001. Int Immunol","Nomiyama, et al. 2001. Int Immunol","Nomiyama, et al. 2001. Int Immunol","Nomiyama, et al. 2001. Int Immunol","Howard, et al. 2000. Blood","Fox, et al. 2006. J Biol Chem","Nomiyama, et al. 2001. Int Immunol","Nomiyama, et al. 2001. Int Immunol","Nomiyama, et al. 2001. Int Immunol","Nomiyama, et al. 2001. Int Immunol","Gardner, et al. 1994. Biochem Biophys Res Commun","Meyrath, et al. 2021. J Leukoc Biol","Imai, et al. 1997. J Biol Chem","Imai, et al. 1997. J Biol Chem","Imai, et al. 1997. J Biol Chem","Imai, et al. 1997. J Biol Chem","Imai, et al. 1997. J Biol Chem","Baba, et al. 1997. J Biol Chem","Yoshida, et al. 1997. J Biol Chem","Howard, et al. 2000. Blood","Garlisi, et al. 1999. Eur J Immunol","Gardner, et al. 1994. Biochem Biophys Res Commun","Bonecchi, et al. 2004. J Immunol","Szpakowska, et al. 2023. Front Immunol","Meyrath, et al. 2021. J Leukoc Biol","Krohn, et al. 2013. PLOS One","Krohn, et al. 2013. PLOS One","Krohn, et al. 2013. PLOS One","Nibbs, et al. 2000. J Immunol","Krohn, et al. 2013. PLOS One","Krohn, et al. 2013. PLOS One","Krohn, et al. 2013. PLOS One","Islam, et al. 2013. J Exp Med","Krohn, et al. 2013. PLOS One","Krohn, et al. 2013. PLOS One","Krohn, et al. 2013. PLOS One","Gardner, et al. 1994. Biochem Biophys Res Commun","Meyrath, et al. 2021. J Leukoc Biol","Yoshida, et al. 1997. J Biol Chem","Yoshida, et al. 1997. J Biol Chem","Yoshida, et al. 1997. J Biol Chem","Yoshida, et al. 1997. J Biol Chem","Yoshida, et al. 1997. J Biol Chem","Yoshida, et al. 1997. J Biol Chem","Yoshida, et al. 1997. J Biol Chem","Yoshida, et al. 1997. J Biol Chem","Weng, et al. 1998. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Bonecchi, et al. 2004. J Immunol","Gosling, et al. 2000. J Immunol","Meyrath, et al. 2021. J Leukoc Biol","Matti, et al. 2020. Front Immunol","Leick, et al. 2010. Immunology","Baba, et al. 1997. J Biol Chem","Baba, et al. 1997. J Biol Chem","Baba, et al. 1997. J Biol Chem","Baba, et al. 1997. J Biol Chem","Imai, et al. 1997. J Biol Chem","Baba, et al. 1997. J Biol Chem","Power, et al. 1997. J Exp Med","Baba, et al. 1997. J Biol Chem","Matti, et al. 2020. J Leukoc Biol","Baba, et al. 1997. J Biol Chem","Yoshida, et al. 1997. J Biol Chem","Baba, et al. 1997. J Biol Chem","Weng, et al. 1998. J Biol Chem","Baba, et al. 1997. J Biol Chem","Baba, et al. 1997. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Bonecchi, et al. 2004. J Immunol","Matti, et al. 2020. J Leukoc Biol","Meyrath, et al. 2021. J Leukoc Biol","Matti, et al. 2020. J Leukoc Biol","Yoshida, et al. 1998. J Biol Chem","Yoshida, et al. 1998. J Biol Chem","Yoshida, et al. 1998. J Biol Chem","Yoshida, et al. 1998. J Biol Chem","Yoshida, et al. 1998. J Biol Chem","Yoshida, et al. 1998. J Biol Chem","Yoshida, et al. 1998. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Gosling, et al. 2000. J Immunol","Meyrath, et al. 2021. J Leukoc Biol","Matti, et al. 2020. Front Immunol","Leick, et al. 2010. Immunology","Imai, et al. 1998. J Biol Chem","Imai, et al. 1998. J Biol Chem","Imai, et al. 1998. J Biol Chem","Imai, et al. 1998. J Biol Chem","Imai, et al. 1998. J Biol Chem","Imai, et al. 1998. J Biol Chem","Imai, et al. 1998. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Szpakowska, et al. 2023. Front Immunol","Bonecchi, et al. 2004. J Immunol","Meyrath, et al. 2021. J Leukoc Biol","Youn, et al. 1998. Blood","Nardelli, et al. 1999. J  Immunol","Nardelli, et al. 1999. J  Immunol","Nardelli, et al. 1999. J  Immunol","Gardner, et al. 1994. Biochem Biophys Res Commun","Meyrath, et al. 2021. J Leukoc Biol","Parody, et al. 2004. Cytokine","Parody, et al. 2004. Cytokine","White, et al. 1997. J Leukoc Biol","Xanthou, et al. 2003. Eur J Immunol","Meyrath, et al. 2021. J Leukoc Biol","Youn, et al. 1999. Blood","Youn, et al. 1999. Blood","Youn, et al. 1999. Blood","Youn, et al. 1999. Blood","Youn, et al. 1999. Blood","Zaballos, et al. 1999. J Immunol","Gardner, et al. 1994. Biochem Biophys Res Commun","Matti, et al. 2020. Front Immunol","Meyrath, et al. 2021. J Leukoc Biol","Gosling, et al. 2000. J Immunol","Petkovic, et al. 2004. J Biol Chem","Parody, et al. 2004. Cytokine","Ogilvie, et al. 2003. Blood","Kitaura, et al. 1999. J Biol Chem","Parody, et al. 2004. Cytokine","Petkovic, et al. 2004. J Biol Chem","Petkovic, et al. 2004. J Biol Chem","Petkovic, et al. 2004. J Biol Chem","Petkovic, et al. 2004. J Biol Chem","Petkovic, et al. 2004. J Biol Chem","Petkovic, et al. 2004. J Biol Chem","Petkovic, et al. 2004. J Biol Chem","Xanthou, et al. 2003. Eur J Immunol","Petkovic, et al. 2004. J Biol Chem","Petkovic, et al. 2004. J Biol Chem","Nakayama, et al. 2010. J Immunol","Szpakowska, et al. 2023. Front Immunol","Meyrath, et al. 2021. J Leukoc Biol","Homey, et al. 2000. J Immunol","Rajagopal, et al. 2013. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Meyrath, et al. 2021. J Leukoc Biol","Pan, et al. 2000. J Immunol","Pan, et al. 2000. J Immunol","Rajagopal, et al. 2013. J Biol Chem","Wang, et al. 2000. J Biol Chem","Meyrath, et al. 2021. J Leukoc Biol","Myers, et al. 1995. J Biol Chem","Power, et al. 1995. J Bio Chem","Ahuja, et al. 1996. J Biol Chem","Lee, et al. 1992. J Biol Chem","Ahuja, et al. 1996. J Biol Chem","Lee, et al. 1992. J Biol Chem","Weng, et al. 1998. J Biol Chem","Kashiwazaki, et al. 2003. Int Immunol","Horuk, et al. 1996. J Leukoc Biol","Szpakowska, et al. 2023. Front Immunol","Meyrath, et al. 2021. J Leukoc Biol","Ahuja, et al. 1996. J Biol Chem","Ahuja, et al. 1996. J Biol Chem","Mei, et al. 2010. Immunity","Szpakowska, et al. 2023. Front Immunol","Chevigne, et al. 2010. Cancers (Basel)","Meyrath, et al. 2021. J Leukoc Biol","Ahuja, et al. 1996. J Biol Chem","Ahuja, et al. 1996. J Biol Chem","Chevigne, et al. 2010. Cancers (Basel)","Meyrath, et al. 2021. J Leukoc Biol","Struyf, et al. 2011. Blood","Fox, et al. 2018. Sci Rep","Gray, et al. 2023. Cell Rep","Lasagni, et al. 2003. J Exp Med","Weng, et al. 1998. J Biol Chem","D'Uonnolo, et al. 2022. Front Immunol","Gray, et al. 2023. Cell Rep","McMorran, et al. 2012. Science","Horuk, et al. 1996. J Leukoc Biol","Meyrath, et al. 2021. J Leukoc Biol","Ahuja, et al. 1996. J Biol Chem","Ahuja, et al. 1996. J Biol Chem","Kashiwazaki, et al. 2003. Int Immunol","Gardner, et al. 1994. Biochem Biophys Res Commun","Horuk, et al. 1996. J Leukoc Biol","Meyrath, et al. 2021. J Leukoc Biol","Wuyts, et al. 1997. Biochemistry","Wuyts, et al. 1997. Biochemistry","Gardner, et al. 1994. Biochem Biophys Res Commun","Meyrath, et al. 2021. J Leukoc Biol","Power, et al. 1995. J Bio Chem","Ahuja, et al. 1996. J Biol Chem","Ahuja, et al. 1996. J Biol Chem","Ahuja, et al. 1996. J Biol Chem","Ahuja, et al. 1996. J Biol Chem","Weng, et al. 1998. J Biol Chem","Horuk, et al. 1996. J Leukoc Biol","Meyrath, et al. 2021. J Leukoc Biol","Combadiere, et al. 1995. J Biol Chem","Uguccioni, et al. 1997. J Clin Invest","Charo, et al. 1994. Proc Natl Acad Sci USA","Myers, et al. 1995. J Biol Chem","Combadiere, et al. 1995. J Biol Chem","Uguccioni, et al. 1997. J Clin Invest","Power, et al. 1995. J Bio Chem","Ahuja, et al. 1996. J Biol Chem","Ahuja, et al. 1996. J Biol Chem","Ahuja, et al. 1996. J Biol Chem","Ahuja, et al. 1996. J Biol Chem","Weng, et al. 1998. J Biol Chem","Neote, et al. 1993. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Horuk, et al. 1996. J Leukoc Biol","Bonecchi, et al. 2004. J Immunol","Meyrath, et al. 2021. J Leukoc Biol","Loetscher, et al. 2001. J Biol Chem","Xanthou, et al. 2003. Eur J Immunol","Weng, et al. 1998. J Biol Chem","Rajagopal, et al. 2013. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Meyrath, et al. 2021. J Leukoc Biol","Chevigne, et al. 2010. Cancers (Basel)","Chevigne, et al. 2010. Cancers (Basel)","Chevigne, et al. 2010. Cancers (Basel)","Loetscher, et al. 2001. J Biol Chem","Xanthou, et al. 2003. Eur J Immunol","Chevigne, et al. 2010. Cancers (Basel)","Chevigne, et al. 2010. Cancers (Basel)","Chevigne, et al. 2010. Cancers (Basel)","Power, et al. 1995. J Bio Chem","Chevigne, et al. 2010. Cancers (Basel)","Chevigne, et al. 2010. Cancers (Basel)","Chevigne, et al. 2010. Cancers (Basel)","Chevigne, et al. 2010. Cancers (Basel)","Chevigne, et al. 2010. Cancers (Basel)","Chevigne, et al. 2010. Cancers (Basel)","Weng, et al. 1998. J Biol Chem","Chevigne, et al. 2010. Cancers (Basel)","Chevigne, et al. 2010. Cancers (Basel)","Chevigne, et al. 2010. Cancers (Basel)","Chevigne, et al. 2010. Cancers (Basel)","Chevigne, et al. 2010. Cancers (Basel)","Gardner, et al. 1994. Biochem Biophys Res Commun","Chevigne, et al. 2010. Cancers (Basel)","Szpakowska, et al. 2023. Front Immunol","Meyrath, et al. 2021. J Leukoc Biol","Loetscher, et al. 2001. J Biol Chem","Loetscher, et al. 2001. J Biol Chem","Loetscher, et al. 2001. J Biol Chem","Xanthou, et al. 2003. Eur J Immunol","Loetscher, et al. 2001. J Biol Chem","Petkovic, et al. 2004. J Leukoc Biol","Loetscher, et al. 2001. J Biol Chem","Loetscher, et al. 2001. J Biol Chem","Loetscher, et al. 2001. J Biol Chem","Loetscher, et al. 2001. J Biol Chem","Loetscher, et al. 2001. J Biol Chem","Loetscher, et al. 2001. J Biol Chem","Cole, et al. 1998. J Exp Med","Loetscher, et al. 2001. J Biol Chem","Loetscher, et al. 2001. J Biol Chem","Loetscher, et al. 2001. J Biol Chem","Loetscher, et al. 2001. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Burns, et al. 2006. J Exp Med","Benredjem, et al. 2017. J Biol Chem","Meyrath, et al. 2021. J Leukoc Biol","Weng, et al. 1998. J Biol Chem","Bleul, et al. 1996. Nature","Drury, et al. Proc Natl Acad Sci","Gutjahr, et al. 2021. Sci Signal","Gardner, et al. 1994. Biochem Biophys Res Commun","Benredjem, et al. 2017. J Biol Chem","Burns, et al. 2006. J Exp Med","Meyrath, et al. 2021. J Leukoc Biol","Jenh, et al. 2001. Cytokine","Jenh, et al. 2001. Cytokine","Jenh, et al. 2001. Cytokine","Jenh, et al. 2001. Cytokine","Rosenberg, et al. 2020. Acta Crystallogr D Struct Biol","Gardner, et al. 1994. Biochem Biophys Res Commun","Gosling, et al. 2000. J Immunol","Meyrath, et al. 2021. J Leukoc Biol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Tanegashima, et al. 2013. FEBS Lett","Tanegashima, et al. 2013. FEBS Lett","Collins, et al. 2017. FASEB J","Otte, et al. 2014. FEBS Lett","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Kouzeli, et al. 2020. Front Immunol","Meyrath, et al. 2021. J Leukoc Biol","Petit, et al. 2008. Eur J Immunol","Matloubian, et al. 2000. Nat Immunol","Maravillas-Montero, et al. 2015. J Immunol","Maravillas-Montero, et al. 2015. J Immunol","Maravillas-Montero, et al. 2015. J Immunol","Maravillas-Montero, et al. 2015. J Immunol","Binti Mohd Amir, et al. 2018. J Immunol","Maravillas-Montero, et al. 2015. J Immunol","Meyrath, et al. 2021. J Leukoc Biol","Power, et al. 1995. J Bio Chem","Fong, et al. 2002. J Biol Chem","Gardner, et al. 1994. Biochem Biophys Res Commun","Meyrath, et al. 2021. J Leukoc Biol","Fox, et al. 2015. Cytokine","Gardner, et al. 1994. Biochem Biophys Res Commun","Meyrath, et al. 2021. J Leukoc Biol","Fox, et al. 2015. Cytokine","Meyrath, et al. 2021. J Leukoc Biol"],"PMID":[9294137,9211859,9207005,15358176,15067078,10706668,32480426,7890708,8530354,7890708,15207250,8146186,12689946,15207250,8642344,7642634,9430724,9169480,9312096,8663314,10477718,9294137,9169459,9153236,8550564,8550564,9660793,15358176,9405404,15067078,37153591,32480426,10961862,11449371,11449371,11449371,10961862,15067078,8530354,7679328,15039444,7890708,11085751,8146186,7890708,9276730,8642344,9276730,11085751,7642634,8573157,9430724,9169480,15039444,10477718,11085751,9294137,9169459,9153236,8550564,8550564,9660793,15358176,15067078,9405404,32480426,15240137,15240137,15240137,12070155,7679328,12381680,8146186,12070155,7890708,8530354,9169480,9430724,12070155,12427015,9294137,9169459,9153236,10540332,9660793,15358176,9405404,15067078,32480426,7679328,15039444,8530354,7890708,7890708,8146186,8530354,8642344,12450563,9169480,8573157,15039444,10477718,9294137,9169459,9153236,9660793,35720349,7517400,7592697,15358176,15067078,9405404,37153591,32480426,7545673,8530354,8530354,28536301,8642344,12450563,9430724,10477718,11861332,9153236,9660793,15358176,15067078,37153591,9405404,32480426,9115216,12381680,28536301,12554737,19224633,9005985,9276730,9790730,9153236,15358176,9405404,37153591,32480426,9685332,11264152,11559700,15207250,8642344,10477718,9294137,12884299,9660793,15358176,15067078,9405404,32480426,8955214,9276730,21088225,9276730,12450563,9430724,9790730,10477718,9660793,11110785,15358176,9405404,32480426,12381680,9687537,11085751,9687537,9687537,11085751,9687537,11085751,9294137,9687537,15358176,9405404,32480426,9548457,9346309,9346309,9346309,9548457,9346309,9294137,9346309,9346309,32480426,10910894,16226254,11470772,12554737,11470772,11470772,11470772,11470772,11470772,11470772,11470772,10910894,17023422,11470772,11470772,11470772,11470772,15358176,32480426,9169480,9169480,9169480,9169480,9169480,9169459,9153236,10910894,10540332,15358176,15067078,37153591,32480426,23951310,23951310,23951310,10640766,23951310,23951310,23951310,23999500,23951310,23951310,23951310,15358176,32480426,9153236,9153236,9153236,9153236,9153236,9153236,9153236,9153236,9660793,15358176,15067078,10706668,32480426,32391018,20002784,9169459,9169459,9169459,9169459,9169480,9169459,9294137,9169459,32533638,9169459,9153236,9169459,9660793,9169459,9169459,15358176,15067078,32533638,32480426,32533638,9507024,9507024,9507024,9507024,9507024,9507024,9507024,15358176,10706668,32480426,32391018,20002784,9430724,9430724,9430724,9430724,9430724,9430724,9430724,15358176,37153591,15067078,32480426,9558365,9886417,9886417,9886417,15358176,32480426,15207250,15207250,9365122,12884299,32480426,10498628,10498628,10498628,10498628,10498628,10229797,15358176,32391018,32480426,10706668,15039444,15207250,12689946,10488147,15207250,15039444,15039444,15039444,15039444,15039444,15039444,15039444,12884299,15039444,15039444,20974991,37153591,32480426,10725697,24145037,15358176,32480426,10975800,10975800,24145037,10781587,32480426,7890708,9294137,8550564,1379593,8702798,1379593,9660793,13679391,8558064,37153591,32480426,8702798,8702798,20643340,37153591,33801414,32480426,8702798,8702798,33801414,32480426,20980681,29930254,36640356,12782716,9660793,35720349,36640356,23224555,8558064,32480426,8702798,8702798,13679391,15358176,8558064,32480426,9054580,9054580,15358176,32480426,9294137,8550564,8702798,8550564,8702798,9660793,8558064,32480426,8530354,9276730,8146186,7890708,8530354,9276730,9294137,8550564,8702798,8550564,8702798,9660793,8389755,15358176,8558064,15067078,32480426,11110785,12884299,9660793,24145037,15358176,32480426,33801414,33801414,33801414,11110785,12884299,33801414,33801414,33801414,9294137,33801414,33801414,33801414,33801414,33801414,33801414,9660793,33801414,33801414,33801414,33801414,33801414,15358176,33801414,37153591,32480426,11110785,11110785,11110785,12884299,11110785,15178708,11110785,11110785,11110785,11110785,11110785,11110785,9625760,11110785,11110785,11110785,11110785,15358176,16940167,27875312,32480426,9660793,8752280,21990345,34404752,15358176,27875312,16940167,32480426,11554781,11554781,11554781,11554781,33021505,15358176,10706668,32480426,33123134,33123134,33123134,33123134,33123134,33123134,33123134,33123134,33123134,33123134,33123134,33123134,33123134,33123134,33123134,33123134,23669361,24161674,28360196,25451233,33123134,33123134,33123134,33123134,33123134,33123134,33123134,33123134,32480426,18629940,11017100,25411203,25411203,25411203,25411203,29875152,25411203,32480426,9294137,11909868,15358176,32480426,25497737,15358176,32480426,25497737,32480426],"binding_kd_ki_nm":["","1.2","","309.3","","140","","","","0.26","","","","","16","","","","","","","","","","","","","34.9","16.5","0.33","","","","","","","","","10","5.1","","","","","","","","","","","","","","","","","","","","","","",">1000","","64","","","","","","","17.1","","","","","","","","","","","","","",">1000","1.7","2.9","","","","","","","","","0.5","","","","","","","","","420","","5","5.69","5.6","","3.6","","","0.7","8","7","0.32","0.7","","","","","","250","6.6","","","1.2","","5","19.8","1.31","3","","","","0.51","","151","0.768","","","","","7.5","","0.1","","","","60","67.3","","46","","","","","","","","0.82","5.89","70","","32.8","5.97","","40","","0.023","","","2.7","","0.04","","","91.8","27.2","","","","","","","","","","","","","","","","","","","","","","","","","","","","","257.7","","","","","0.5","","","","","","","2.9","","","","","","","","","","1.04","","","","202.6","","","","","","","","","","1700",">1000","","","","","","","","","","","","","0.9","","","","","140","","",">1000","","","","","","","","","","","",">1000","","","","","","","","0.18","","","",">1000","","0.33","","","","","",">1000","","","","","","","","","","","","",">1000","","","","","","","","","","","","","","","","","","","","","","","",">1000","","","","","","","","","","450","1","0.8",">1000","","21","","","","","","","","","","","","","0.28","","","","","","","","460","","","","","28.8","5.2","","","","66.7","","","","","1.9","","","7.3","","","","","","","","","3.6","","0.8","","","5.18","21.3","5.5","","","4065","","4.9","","162","","","","","1582","","","","","","","","","","","","0.14","","","","","","622.4","","","","","","","65","","","","","","","","","0.3","","","","","12.7","2","","","400","","25","6.23",">1000","","2","","","","28","","","304.5","","","","","","","","","","","","","","","","","","","14.7","","8","","","","","","","","","","","","","","","","","","","","","45",">1000","","",">1000","","",""],"binding_ec50_ic50_nm":["","","","","","","","","","","0.15","","3.5","130","","","","","","","45.7","","","","","","","","","","","","","","","","","","","","47","0.11","0.32","","","","","","","","14.5","","","25","0.9","0.11","","","","","","","","","","","","","0.38","","232","11.9","","","","","","","","0.37","","","","","","","","","","468","900","15","0.14","","","","","17.8","","14.5","2.3","9.14","","","","","","","","","","","","","","","","","","14.4","","2.14","","","","","","","","","","","","","","","","","","","","","","","","","20","","19","","3.12","","","","","","","2.3","5.22","2","","","","","","","","","","46","93","","","","","","","","","","","","","12",">700","2.5","","","",">2000",">2000","","11.8","","77","","95","","","130","","",">1000","7.12","","","","","","","","","","","","","","","12.1","","58","","","","","","6.8","","","","","","","","","","","","","","","","","18","","","","","6","","","44","","","","","","","12","3.4","","","","","","","","","","","","","","","","","","","0.5","","12","","","","","","","0.65","","","","","","","","","10","","","","","580","9.7","5","","","","","","","","","","","","7","1770","3","97.6","","1.2","","64","","","","","","","","","35","","","","","","","","","","","","","","","","","","","","","","","","0.8","","","","","","0.7","","","","","","1.85","","","","","","","","1","","","","","","","","","","","","","0.5","","","","","","","","","","","","7","","0.4","","","","","","","","","","71.1","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","79","","","","","","","","","","","","","","16","","","","","","","1.3","","","","","716","","","","140","","","","","","","","","","","","","","","","","","","11.5","","","","","","","","","","","","37.7","","","","","","","","","","","","","","","","",""],"signaling_ec50_ic50_nm":["NA","NA",2,"NA","NA","NA","NA",820,"NA",3.4,0.7,10,"NA",200,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",1,"NA","NA","NA",15,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",3.2,3.3,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",2.3,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",30,"NA","NA","NA","NA",10,"NA","NA","NA","NA",1.3,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",3.4,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",57.5,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",0.3,"NA","NA","NA",1000,"NA","NA","NA","NA","NA","NA",29.76,"NA",3.1,"NA","NA",103,"NA","NA","NA","NA","NA","NA",8,2.8,"NA","NA",78,"NA",4.8,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",8,"NA","NA","NA","NA","NA","NA","NA",10,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",0.9,"NA","NA","NA","NA","NA",3,32,"NA","NA","NA","NA","NA","NA","NA",100,50,80,"NA","NA","NA","NA","NA","NA","NA","NA","NA",42,200,"NA","NA","NA","NA","NA","NA","NA","NA","NA",5,133,"NA","NA","NA","NA","NA","NA","NA","NA","NA",10,"NA",128,"NA","NA","NA","NA","NA","NA","NA",8.3,2,"NA","NA","NA","NA","NA","NA","NA","NA","NA",115,24,"NA","NA","NA","NA",3,1.4,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",7.86,"NA","NA","NA","NA",127,"NA","NA","NA","NA",50,"NA",8,"NA","NA","NA","NA","NA","NA","NA",4,"NA","NA","NA","NA",65,1,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",40,10.6,"NA","NA","NA","NA","NA","NA","NA","NA","NA",40,45,9,7,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",3,4,5,4,"NA","NA","NA","NA","NA","NA","NA","NA",100,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",10,"NA","NA","NA","NA","NA","NA",5.1,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",8,"NA","NA","NA","NA","NA","NA",4.5,"NA","NA","NA","NA","NA","NA",2.49,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",0.4,"NA","NA",59.2,"NA","NA",42.3,"NA"],"chemotaxis_ec50_ic50_nm":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",803.2,1.6,2.86,"NA",1500,213,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA",300,"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"],"chemotaxis_max_nm":["","10","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","10","","","","","","","","","","","","","10","","","","","","","","","","","","","1.2","1.2","1.2","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","6","","","","","","","","","","","","","","","","12","","","12","","","","5","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","100","","100",">1000","100","","","","","","","","","","","","","","","","","","","","","","","","","","","","","10","","","","10","","","","","","","","","","","","","","","","","","","","","","","","","","","","12","","","","","","","","","","","","","","","","","","","10","","","","","","","","","1","","","","","","","","","","","","","","","","1","","","","","","","","100","","","","","","","","","","","","","","","","","","","","100","","","50","","","","300","300","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","10","","","","","","","","","","","","","","","","","","","500","250","","","","","","","","","","","","","300","","","","","","","","","","","","","","","","","","","","","30","","","","","","","","","","","","","10","","","10",""],"ligand_type":["no interaction","agonist","agonist","ND","no interaction","ND","no interaction","agonist","no interaction","agonist","agonist","agonist","agonist","agonist","ND","agonist","no interaction","no interaction","no interaction","no interaction","ND","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","ND","ND","agonist","agonist","no interaction","agonist","agonist","agonist","ND","agonist","agonist","agonist","agonist","agonist","agonist","agonist","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","agonist","ND","no interaction","no interaction","agonist","agonist","agonist","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","agonist","ND","no interaction","agonist","agonist","agonist","agonist","agonist","agonist","no interaction","agonist","no interaction","no interaction","no interaction","no interaction","agonist","agonist","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","ND","agonist","no interaction","agonist","ND","agonist","agonist","no interaction","no interaction","no interaction","agonist","agonist","no interaction","ND","ND","agonist","no interaction","no interaction","no interaction","ND","no interaction","ND","ND","ND","agonist","ND","agonist","no interaction","agonist","agonist","agonist","agonist","agonist","agonist","no interaction","antagonist","antagonist","no interaction","ND","ND","agonist","agonist","ND","agonist","agonist","agonist","agonist","agonist","agonist","agonist","agonist","agonist","no interaction","ND","ND","agonist","no interaction","no interaction","antagonist","agonist","agonist","agonist","agonist","no interaction","ND","ND","ND","agonist","ND","no interaction","no interaction","ND","agonist","ND","agonist","no interaction","agonist","agonist","ND","no interaction","ND","ND","no interaction","agonist","agonist","agonist","no interaction","no interaction","agonist","no interaction","agonist","no interaction","no interaction","ND","ND","no interaction","agonist","agonist","ND","agonist","agonist","no interaction","no interaction","no interaction","no interaction","no interaction","agonist","conflicting","agonist","ND","agonist","agonist","agonist","agonist","no interaction","no interaction","agonist","agonist","no interaction","no interaction","no interaction","no interaction","no interaction","ND","no interaction","no interaction","no interaction","no interaction","agonist","no interaction","no interaction","no interaction","ND","no interaction","ND","agonist","agonist","agonist","antagonist","antagonist","antagonist","antagonist","antagonist","antagonist","no interaction","agonist","no interaction","no interaction","no interaction","ND","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","agonist","no interaction","ND","no interaction","no interaction","ND","agonist","agonist","ND","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","agonist","agonist","agonist","no interaction","no interaction","no interaction","ND","no interaction","no interaction","no interaction","no interaction","no interaction","agonist","agonist","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","agonist","no interaction","ND","agonist","agonist","no interaction","no interaction","no interaction","no interaction","agonist","no interaction","no interaction","no interaction","no interaction","agonist","agonist","agonist","agonist","agonist","no interaction","no interaction","no interaction","no interaction","antagonist","agonist","agonist","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","agonist","agonist","no interaction","agonist","agonist","ND","antagonist","antagonist","antagonist","agonist","agonist","no interaction","antagonist","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","agonist","agonist","no interaction","agonist","agonist","no interaction","no interaction","agonist","agonist","agonist","agonist","no interaction","no interaction","no interaction","agonist","ND","agonist","agonist","no interaction","ND","ND","no interaction","no interaction","no interaction","agonist","ND","agonist","agonist","no interaction","agonist","agonist","no interaction","no interaction","agonist","agonist","no interaction","ND","no interaction","no interaction","no interaction","ND","ND","no interaction","agonist","agonist","ND","ND","ND","no interaction","agonist","agonist","ND","no interaction","no interaction","agonist","agonist","agonist","agonist","no interaction","ND","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","agonist","agonist","agonist","agonist","no interaction","ND","ND","ND","no interaction","no interaction","antagonist","antagonist","agonist","agonist","ND","no interaction","no interaction","no interaction","no interaction","antagonist","antagonist","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","agonist","no interaction","no interaction","no interaction","no interaction","no interaction","ND","agonist","agonist","no interaction","no interaction","no interaction","no interaction","antagonist","no interaction","antagonist","antagonist","no interaction","no interaction","no interaction","no interaction","no interaction","agonist","no interaction","no interaction","no interaction","no interaction","ND","ND","agonist","no interaction","ND","agonist","agonist","ND","ND","agonist","ND","no interaction","no interaction","no interaction","agonist","agonist","agonist","ND","ND","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","other","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","antagonist","ND","other","no interaction","other","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","no interaction","agonist","agonist","no interaction","no interaction","no interaction","agonist","no interaction","no interaction","no interaction","no interaction","agonist","ND","agonist","agonist","ND","agonist","agonist","agonist"],"interaction_strength":["0","3","3","2","0","2","0","2","0","3","3","3","3","2","3","ND","0","0","0","0","3","0","0","0","0","0","0","3","3","3","3","0","ND","ND","ND","ND","ND","ND","3","3","3","3","3","0","0","0","0","0","0","ND","3","0","0","3","3","3","0","0","0","0","0","0","0","ND","3","0","3","3","3","ND","2","3","0","ND","0","0","0","0","ND","3","0","0","0","0","0","0","3","3","0","2","2","3","3","0","0","0","3","3","0","3","3","3","0","0","0","2","0","3","3","3","ND","3","3","0","3","3","3","3","3","3","0","3","ND","0","2","3","ND","3","3","ND","3","3","3","3","ND","ND","ND","3","0","2","3","3","0","0","1","3","3","3","3","0","3","3","3","ND","3","0","0","3","3","3","3","0","3","3","3","0","3","3","0","3","3","3","0","0","3","0","3","0","0","3","3","0","ND","3","2","3","ND","0","0","0","0","0","3","ND","3","ND","3","1","1","2","0","0","1","3","0","0","0","0","0","2","0","0","0","0","3","0","0","0","3","0","3","3","3","1","2","3","3","3","1","2","0","3","0","0","0","2","0","0","0","0","0","0","0","3","0","1","0","0","3","3","3","3","0","0","0","0","0","0","3","3","3","0","0","0","2","0","0","0","0","0","3","2","0","0","0","0","0","0","3","0","3","3","2","0","0","0","0","3","0","0","0","0","3","3","2","ND","3","0","0","0","0","2","3","3","0","0","0","0","0","0","ND","3","0","2","3","3","1","3","3","3","3","0","3","0","0","0","0","0","0","0","0","3","ND","0","3","3","0","0","2","2","2","ND","0","0","0","3","2","3","3","0","ND","3","0","0","0","3","3","1","1","0","3","3","0","0","3","1","0","3","0","0","0","ND","3","0","3","3","ND","3","3","0","ND","ND","3","0","0","1","1","3","3","0","3","0","0","0","0","0","0","0","0","3","3","3","3","0","3","3","3","0","0","1","ND","3","3","3","0","0","0","0","1","ND","0","0","0","0","0","0","0","0","0","0","3","0","0","0","0","0","2","3","3","0","0","0","0","3","0","3","1","0","0","0","0","0","3","0","0","0","0","2","3","3","0","2","ND","3","3","0","3","3","0","0","0","3","2","3","2","2","0","0","0","0","0","0","0","0","0","2","0","0","0","0","0","0","0","3","3","3","0","1","0","0","0","0","0","0","0","0","3","ND","0","0","0","ND","0","0","0","0","3","0","ND","3","0","ND","3","ND"],"evidence_grade":["D","A","A","A","D","A","C","A","C","A","A","A","A","A","A","C","C","C","C","C","A","D","C","C","C","C","D","A","A","A","A","C","C","C","C","C","C","D","A","A","A","A","A","C","A","A","A","A","A","C","A","C","C","A","A","A","D","C","C","C","C","D","A","D","A","C","B","B","A","C","A","A","C","C","A","D","C","C","C","A","D","C","C","A","D","A","A","A","C","A","A","A","A","A","C","C","A","A","C","A","A","A","D","C","C","A","A","A","A","A","D","A","A","C","A","A","A","A","A","A","C","A","C","C","A","A","D","A","A","C","A","A","A","A","C","C","D","A","C","A","A","A","C","C","C","A","A","A","A","D","A","A","A","D","A","C","D","A","A","A","A","C","A","A","A","C","A","A","C","A","A","A","C","C","A","C","A","D","C","A","A","C","C","A","A","A","C","A","D","A","A","C","A","C","A","D","A","C","C","A","C","C","A","A","C","C","C","C","C","A","C","C","C","C","A","C","C","C","A","A","A","A","A","B","A","A","A","B","A","A","A","A","A","A","A","A","C","C","C","C","C","C","C","A","C","A","A","A","A","A","A","A","C","C","C","C","C","C","A","A","A","C","C","C","A","C","C","A","D","A","A","A","C","C","C","C","C","C","A","A","A","A","A","A","C","C","C","A","C","C","C","A","A","A","A","C","A","A","A","A","C","A","A","A","B","C","C","C","C","C","C","B","A","A","A","A","A","A","A","A","A","C","A","C","C","C","C","C","B","C","C","A","C","C","B","A","A","C","B","B","A","C","C","A","D","B","A","A","A","A","C","A","A","C","B","A","B","B","A","C","A","A","C","C","A","A","D","A","D","C","D","D","A","C","A","A","C","A","A","C","C","C","A","C","D","A","B","A","A","A","A","C","C","A","C","A","C","A","D","A","A","A","A","A","A","A","A","D","C","A","C","A","A","A","C","C","C","C","A","C","C","C","C","D","C","C","C","C","C","C","A","C","C","C","C","C","A","A","B","C","C","C","C","A","C","A","C","C","C","C","C","C","A","C","C","C","C","A","A","A","C","A","C","A","A","A","A","A","C","C","C","A","B","A","A","A","C","C","C","C","C","C","B","C","C","B","C","C","C","C","C","C","C","A","A","A","B","B","C","C","C","C","C","C","C","C","A","C","D","D","D","C","A","D","C","D","A","A","C","A","A","C","A","C"]},"columns":[{"id":"chemokine","name":"chemokine","type":"character"},{"id":"gpcr","name":"gpcr","type":"character"},{"id":"author_date_journal","name":"author_date_journal","type":"character"},{"id":"PMID","name":"PMID","type":"numeric"},{"id":"binding_kd_ki_nm","name":"binding_kd_ki_nm","type":"character"},{"id":"binding_ec50_ic50_nm","name":"binding_ec50_ic50_nm","type":"character"},{"id":"signaling_ec50_ic50_nm","name":"signaling_ec50_ic50_nm","type":"numeric"},{"id":"chemotaxis_ec50_ic50_nm","name":"chemotaxis_ec50_ic50_nm","type":"numeric"},{"id":"chemotaxis_max_nm","name":"chemotaxis_max_nm","type":"character"},{"id":"ligand_type","name":"ligand_type","type":"character"},{"id":"interaction_strength","name":"interaction_strength","type":"character"},{"id":"evidence_grade","name":"evidence_grade","type":"character"}],"filterable":true,"dataKey":"7c05e8111b152c6c09b581eb680d1b5b"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="the-table-includes-the-following-columns"
+class="section level4">
+<h4>The table includes the following columns:</h4>
+<ul>
+<li><em>“chemokine”</em><br />
+</li>
+<li><em>“chemokine_alternate_name”</em><br />
+</li>
+<li><em>“gpcr”</em><br />
+</li>
+<li><em>“PMID”</em> - PubMed ID<br />
+</li>
+<li><em>“author_date_journal”</em><br />
+</li>
+<li><em>“binding_kd_nm”</em> - radioligand (or related) binding assay Kd
+listed in nanomolar<br />
+</li>
+<li><em>“binding_ec50_ic50_nm”</em> - radioligand (or related) binding
+assay EC50 or IC50 listed in nanomolar<br />
+</li>
+<li><em>“signaling_ec50_ic50_nm”</em> - signaling assay (e.g. calcium
+flux, B-arrestin recruitment) EC50 or IC50 listed in nanomolar<br />
+</li>
+<li><em>“chemotaxis_ec50_ic50_nm”</em> - chemotaxis EC50 or IC50 listed
+in nanomolar<br />
+</li>
+<li><em>“chemotaxis_max_nm”</em> - concentration at which maximal
+chemotaxis is achieved in nanonolar<br />
+</li>
+<li><em>“ligand_type”</em> - agonist, antagonist, or other based upon
+data presented in the associated source; ND = not determined<br />
+</li>
+<li><em>“interaction_strength”</em> - assigned based on parameters from
+Kd, Ki, EC50, or IC50 from binding, signaling, or chemotaxis assay;
+assigned as “3” for parameter ≤100nM, “2” for parameter ≤1000nM, “1” for
+parameter &gt;1000nM but with evidence of functional effect at high
+concentration, and “0” for no effect; for sources for which multiple
+parameters are listed, the parameter with the lowest value (i.e. most
+potent) is used to make the assignment; ND = not determined<br />
+</li>
+<li><em>“evidence_grade”</em> - assigned based on type of evidence
+presented in source for/against listed interaction; assigned as “A” if a
+quantitative parameter was derived from concentration-response data
+(e.g. Kd, EC50, IC50, etc.), “B” if a semi-quantitative parameter was
+derived (e.g. dose of maximal chemotaxis), “C” if qualitative evidence
+is presented (e.g. single or multiple concentration point signaling
+assay without quantitative parameter), or “D” if indirect evidence is
+presented</li>
+</ul>
+</div>
+<div
+id="please-see-supplementary-table-1.xlsx-associated-with-the-manuscript.-note-that-additional-columns-are-included-in-that-table-including"
+class="section level4">
+<h4>Please see “Supplementary Table 1.xlsx” associated with the
+manuscript. Note that additional columns are included in that table
+including:</h4>
+<ul>
+<li><em>“data_synopsis”</em> - direct quotations from text summarizing
+experimental data relating to interaction; for chemokines/GPCRs
+referenced in nonstandard names, the standardized chemokine/GPCR name is
+included in brackets<br />
+</li>
+<li><em>“data_comment”</em> - specifies signaling assay, binding assay,
+cells used, etc.</li>
+<li><em>“other_comment”</em> - additional comments relating to the
+source, assignment of interaction strength/evidence grade</li>
+</ul>
+</div>
+<div
+id="see-the-methods-section-associated-with-the-manuscript-for-more-information."
+class="section level4">
+<h4>See the Methods section associated with the manuscript for more
+information.</h4>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>geneatlas.knit</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-17.0.0/react.min.js"></script>
+<script src="site_libs/react-17.0.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet" />
+<script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    interaction network
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="network-viewer.html">network viewer</a>
+    </li>
+    <li>
+      <a href="network-table.html">network evidence</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    common numbering
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="chemokine-numbering.html">common chemokine numbering (CCN)</a>
+    </li>
+    <li>
+      <a href="gpcr-numbering.html">common chemokine receptor numbering (CRN)</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    unstructured regions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="chemokine-nterm.html">chemokine N-terminus</a>
+    </li>
+    <li>
+      <a href="gpcr-nterm.html">GPCR N-terminus</a>
+    </li>
+    <li>
+      <a href="gpcr-ecl2.html">GPCR ECL2</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    variant mapping
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tcga.html">The Cancer Genome Atlas</a>
+    </li>
+    <li>
+      <a href="gnomad.html">GnomAD</a>
+    </li>
+    <li>
+      <a href="geneatlas.html">GeneATLAS</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<div id="chemokine-gpcr-phenotype--and-disease-associated-variants"
+class="section level2">
+<h2>chemokine &amp; GPCR <strong>phenotype- and disease-associated
+variants</strong></h2>
+<p><br></p>
+<div
+id="variant-information-for-all-human-chemokines-and-receptors-was-gathered-for-genome-wide-statistical-associations-between-variants-and-disease--or-phenotypic-associated-traits.-associations-are-based-on-data-from-500000-individuals-from-the-geneatlas-database-made-available-via-uk-biobank-canela-xandri-et-al.-2018.-nature-genetics.-only-missense-variants-were-considered.-all-listed-disease-phenotype-associated-variants-are-below-thresholds-for-significance-used-in-canela-xandri-et-al.-2018."
+class="section level4">
+<h4>Variant information for all human chemokines and receptors was
+gathered for genome-wide statistical associations between variants and
+disease- or phenotypic-associated traits. Associations are based on data
+from ~500,000 individuals from the GeneATLAS database (made available
+via UK Biobank) (Canela-Xandri et al., 2018. <em>Nature Genetics</em>).
+Only missense variants were considered. All listed
+disease-/phenotype-associated variants are below thresholds for
+significance used in Canela-Xandri, et al. 2018.</h4>
+<p><br></p>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-a8245cb7d76635fdfe92" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a8245cb7d76635fdfe92">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"protein":["CCL1","CCL1","CCL1","CCL1","CCL1","CCL1","CCL1","CCL1","CCL8","CCL8","CCL8","CCL11","CCL13","CCL13","CCL13","CCL13","CCL20","CCL20","CCL20","CCL20","CCL24","CCL24","CCL24","CCL24","CCL24","CCL24","CCL24","CCL24","CCL26","CCL27","CCL28","CCL28","CCL28","CCL28","CCL28","CCL28","CCL28","CCL28","CCL28","CCL28","CXCL1","CXCL2","CXCL2","CXCL2","CXCL2","CXCL2","CXCL2","CXCL2","CXCL4","CXCL4","CXCL4","CXCL4L1","CXCL5","CXCL5","CXCL5","CXCL5","CXCL6","CXCL6","CXCL6","CXCL6","CXCL16","CXCL16","CXCL17","CXCL17","CXCL17","CXCL17","CXCL17","CX3CL1","CX3CL1","CX3CL1","CX3CL1","XCL1","CCR1","CCR1","CCR1","CCR1","CCR1","CCR2","CCR2","CCR2","CCR2","CCR3","CCR3","CCR4","CCR4","CCR4","CCR4","CCR6","CCR6","CCR6","CCR6","CCR6","CCR6","CCR6","CCR6","CCR10","CCR10","CCR10","CCR10","CCR10","CCR10","CCR10","CXCR1","CXCR1","CXCR1","CXCR1","CXCR1","CXCR1","CXCR1","CXCR1","CXCR1","CXCR1","CXCR1","CXCR1","CXCR2","CXCR2","CXCR2","CXCR2","CXCR2","CXCR2","CXCR2","CXCR2","CXCR2","CXCR2","CXCR2","CXCR2","CXCR2","CXCR2","CXCR2","CXCR2","CXCR2","CXCR3","CXCR3","CXCR3","CXCR3","CXCR3","CXCR3","CXCR3","CXCR3","CXCR3","CXCR3","CXCR3","CX3CR1","CX3CR1","CX3CR1","CX3CR1","CX3CR1","CX3CR1","CX3CR1","CX3CR1","CX3CR1","CX3CR1","CX3CR1","CX3CR1","CX3CR1","CX3CR1","XCR1","XCR1","ACKR1","ACKR1","ACKR1","ACKR1","ACKR1","ACKR1","ACKR1","ACKR1","ACKR1","ACKR1","ACKR1","ACKR1","ACKR1","ACKR1","ACKR1","ACKR1","ACKR2","ACKR2","ACKR2","ACKR2","ACKR2","ACKR2","ACKR2","ACKR2","ACKR2","ACKR2","ACKR3","ACKR3","ACKR3","ACKR4","CCRL2","CCRL2","CCRL2","CCRL2","CCRL2","CCRL2","CCRL2","CCRL2","CCRL2","CCRL2","CCRL2","CCRL2","CCRL2","CCRL2","CCRL2","CCRL2","CCRL2","CCRL2"],"CCN or CRN":["B2.3","B2.3","B2.3","B2.3","b1b2.10","B2.3","B2.3","B2.3","NTc.Cm20","NTc.Cm20","NTc.Cm20","NTc.Cm11","NTc.Cm29","NTc.Cm5","NTc.Cm29","NTc.Cm5","cxb1.5","cxb1.5","cxb1.5","cxb1.5","NTc.Cm2","NTc.Cm4","CT.13","CT.21","CT.13","CT.21","NTc.Cm2","NTc.Cm4","NTc.Cm15","NTc.Cm30","CT.25","CT.25","CT.25","CT.25","CT.25","NTc.Cm12","NTc.Cm12","CT.25","CT.25","NTc.Cm12","b1b2.13","NTc.Cm19","NTc.Cm19","NTc.Cm40","NTc.Cm19","NTc.Cm40","NTc.Cm19","NTc.Cm19","NTc.Cm16","NTc.Cm16","NTc.Cm16","b1b2.10","CT.3","CT.3","CT.3","CT.3","B3.4","B3.4","B3.4","B3.4","cxb1.16","NTc.Cm38","NTc.Cm5","NTc.Cm5","NTc.Cm5","NTc.Cm5","NTc.Cm5","CT.146","CT.146","CT.146","CT.146","CT.22","2x40","2x40","2x64","2x40","2x40","CT.35","1x54","6x41","1x54","5x61","5x61","CT.4","CT.4","CT.4","CT.4","CT.24","CT.5","CT.24","CT.5","CT.24","CT.5","CT.5","CT.5","CT.23","CT.23","CT.23","CT.23","CT.23","CT.23","CT.23","CT.13","6x61","34x52","CT.13","7x30","7x30","6x61","CT.13","6x61","7x30","5x47","7x30","34x52","5x68","34x52","6x32","34x52","6x32","12x50","5x68","5x68","34x52","34x52","6x32","5x68","5x68","12x50","5x68","34x52","CT.6","NTr.Cm27","7x26","NTr.Cm27","NTr.Cm27","1x55","7x26","CT.6","ECL2.11","8x51","NTr.Cm27","7x39","6x53","7x39","6x53","7x39","7x39","6x53","7x39","6x53","CT.10","7x39","6x53","4x43","7x39","ECL3.1","6x64","NTr.Cm9","2x44","NTr.Cm9","2x44","ICL1.3","ICL1.3","NTr.Cm9","ICL1.3","NTr.Cm9","NTr.Cm9","2x44","ICL1.3","NTr.Cm9","ICL1.3","NTr.Cm9","ICL1.3","1x27","5x61","7x52","1x27","1x27","7x52","1x27","7x52","1x27","1x27","1x52","1x52","6x34","2x41","4x62","4x63","4x63","4x63","4x62","4x63","4x62","4x62","4x63","4x63","4x62","6x40","1x55","6x40","4x62","4x63","6x40","4x63"],"trait ID":["clinical_c_L30","clinical_c_F05","clinical_c_Block_G30-G32","clinical_c_G31","clinical_c_M46","clinical_c_G20","clinical_c_L89","clinical_c_Block_F00-F09","cancer_c_Block_D00-D09","cancer_c_D04","clinical_c_N97","30190-0.0","clinical_c_K85","clinical_c_K85","clinical_c_L92","clinical_c_L92","cancer_c_Block_C51-C58","selfReported_n_1250","clinical_c_M70","cancer_c_C56","30210-0.0","30210-0.0","selfReported_n_1410","selfReported_n_1410","selfReported_n_1407","selfReported_n_1407","30150-0.0","30150-0.0","clinical_c_G44","clinical_c_G25","clinical_c_N03","selfReported_n_1144","clinical_c_I70","clinical_c_I77","selfReported_n_1545","clinical_c_Block_G20-G26","clinical_c_J31","selfReported_n_1185","clinical_c_I22","clinical_c_G20","clinical_c_M87","clinical_c_Block_G30-G32","clinical_c_I95","30000-0.0","clinical_c_Block_I95-I99","30140-0.0","clinical_c_I22","selfReported_n_1164","selfReported_n_1747","clinical_c_H66","clinical_c_N86","cancer_c_C20","clinical_c_L30","clinical_c_I85","clinical_c_I34","clinical_c_I22","clinical_c_N19","clinical_c_I12","clinical_c_B07","clinical_c_K60","selfReported_n_1734","selfReported_n_1262","clinical_c_M71","selfReported_n_1223","clinical_c_I46","clinical_c_K11","clinical_c_G62","clinical_c_F05","selfReported_n_1211","selfReported_n_1158","clinical_c_I89","selfReported_n_1314","clinical_c_O75","clinical_c_O03","selfReported_n_1142","clinical_c_I61","clinical_c_Block_O85-O92","clinical_c_L29","30190-0.0","30190-0.0","30130-0.0","30210-0.0","30150-0.0","selfReported_n_1089","clinical_c_N75","clinical_c_I51","clinical_c_Block_N70-N77","clinical_c_O16","clinical_c_N03","clinical_c_Block_O94-O99","clinical_c_O20","clinical_c_O99","clinical_c_O47","selfReported_n_1239","clinical_c_K11","selfReported_n_1099","clinical_c_Block_K70-K77","clinical_c_G99","clinical_c_Block_B35-B49","clinical_c_K75","clinical_c_M46","clinical_c_N13","clinical_c_L29","selfReported_n_1540","clinical_c_Block_B15-B19","cancer_c_C83","selfReported_n_1094","cancer_c_Block_C00-C14","cancer_c_C64","clinical_c_E83","clinical_c_E86","selfReported_n_1217","selfReported_n_1270","selfReported_n_1713","30160-0.0","selfReported_n_1301","30200-0.0","30200-0.0","30000-0.0","30000-0.0","clinical_c_K74","clinical_c_K74","clinical_c_Block_B15-B19","30190-0.0","30140-0.0","30140-0.0","clinical_c_G43","clinical_c_K60","selfReported_n_1592","selfReported_n_1592","30180-0.0","clinical_c_K20","selfReported_n_1347","clinical_c_K75","clinical_c_Block_B15-B19","clinical_c_G44","clinical_c_I85","selfReported_n_1416","clinical_c_K31","clinical_c_H50","selfReported_n_1164","selfReported_n_1542","30120-0.0","30120-0.0","30200-0.0","30200-0.0","30000-0.0","30190-0.0","30190-0.0","selfReported_n_1251","selfReported_n_1251","clinical_c_M22","30130-0.0","30130-0.0","clinical_c_G91","30180-0.0","selfReported_n_1513","selfReported_n_1211","30160-0.0","30160-0.0","30220-0.0","30220-0.0","30220-0.0","30200-0.0","30000-0.0","30000-0.0","30190-0.0","30140-0.0","30140-0.0","30140-0.0","30130-0.0","30130-0.0","30180-0.0","30180-0.0","30210-0.0","clinical_c_O20","cancer_c_C67","30000-0.0","30190-0.0","clinical_c_I45","30150-0.0","cancer_c_Block_C64-C68","30130-0.0","30180-0.0","clinical_c_N80","selfReported_n_1750","clinical_c_H18","clinical_c_L53","30240-0.0","30240-0.0","50-0.0","30120-0.0","30290-0.0","30290-0.0","30280-0.0","30300-0.0","30300-0.0","30260-0.0","30190-0.0","30190-0.0","clinical_c_L02","selfReported_n_1516","30250-0.0","30250-0.0","30130-0.0","30180-0.0"],"trait description":["L30 Other dermatitis","F05 Delirium, not induced by alcohol and other psychoactive substances","G30-G32 Other degenerative diseases of the nervous system","G31 Other degenerative diseases of nervous system, not elsewhere classified","M46 Other inflammatory spondylopathies","G20 Parkinson's disease","L89 Decubitus ulcer","F00-F09 Organic, including symptomatic, mental disorders","D00-D09 In situ neoplasms","D04 Carcinoma in situ of skin","N97 Female infertility","Monocyte percentage","K85 Acute pancreatitis","K85 Acute pancreatitis","L92 Granulomatous disorders of skin and subcutaneous tissue","L92 Granulomatous disorders of skin and subcutaneous tissue","C51-C58 Malignant neoplasms of female genital organs","hyperthyroidism/thyrotoxicosis","M70 Soft tissue disorders related to use, overuse and pressure","C56 Malignant neoplasm of ovary","Eosinophill percentage","Eosinophill percentage","breast cysts","breast cysts","breast disease (not cancer)","breast disease (not cancer)","Eosinophill count","Eosinophill count","G44 Other headache syndromes","G25 Other extrapyramidal and movement disorders","N03 Chronic nephritic syndrome","pleurisy","I70 Atherosclerosis","I77 Other disorders of arteries and arterioles","chronic fatigue syndrome","G20-G26 Extrapyramidal and movement disorders","J31 Chronic rhinitis, nasopharyngitis and pharyngitis","pancreatic disease","I22 Subsequent myocardial infarction","G20 Parkinson's disease","M87 Osteonecrosis","G30-G32 Other degenerative diseases of the nervous system","I95 Hypotension","White blood cell (leukocyte) count","I95-I99 Other and unspecified disorders of the circulatory system","Neutrophill count","I22 Subsequent myocardial infarction","gastritis/gastric erosions","viral infection","H66 Suppurative and unspecified otitis media","N86 Erosion and ectropion of cervix uteri","C20 Malignant neoplasm of rectum","L30 Other dermatitis","I85 Oesophageal varices","I34 Nonrheumatic mitral valve disorders","I22 Subsequent myocardial infarction","N19 Unspecified renal failure","I12 Hypertensive renal disease","B07 Viral warts","K60 Fissure and fistula of anal and rectal regions","rosacea","disorder or pituitary gland","M71 Other bursopathies","urinary frequency / incontinence","I46 Cardiac arrest","K11 Diseases of salivary glands","G62 Other polyneuropathies","F05 Delirium, not induced by alcohol and other psychoactive substances","peritonitis","other abdominal problem","I89 Other non-infective disorders of lymphatic vessels and lymph nodes","nervous breakdown","O75 Other complications of labour and delivery, not elsewhere classified","O03 Spontaneous abortion","sleep apnoea","I61 Intracerebral haemorrhage","O85-O92 Complications predominantly related to the puerperium","L29 Pruritus","Monocyte percentage","Monocyte percentage","Monocyte count","Eosinophill percentage","Eosinophill count","essential hypertension","N75 Diseases of Bartholin's gland","I51 Complications and ill-defined descriptions of heart disease","N70-N77 Inflammatory diseases of female pelvic organs","O16 Unspecified maternal hypertension","N03 Chronic nephritic syndrome","O94-O99 Other obstetric conditions, not elsewhere classified","O20 Haemorrhage in early pregnancy","O99 Other maternal diseases classifiable elsewhere but complicating pregnancy, childbirth and the puerperium","O47 False labour","testicular problems (not cancer)","K11 Diseases of salivary glands","transient ischaemic attack (tia)","K70-K77 Diseases of liver","G99 Other disorders of nervous system in diseases classified elsewhere","B35-B49 Mycoses","K75 Other inflammatory liver diseases","M46 Other inflammatory spondylopathies","N13 Obstructive and reflux uropathy","L29 Pruritus","psoriatic arthropathy","B15-B19 Viral hepatitis","C83 Diffuse non-Hodgkin's lymphoma","heart arrhythmia","C00-C14 Malignant neoplasms of lip, oral cavity and pharynx","C64 Malignant neoplasm of kidney, except renal pelvis","E83 Disorders of mineral metabolism","E86 Volume depletion","urinary tract infection/kidney infection","infection of nervous system","other fractures","Basophill count","retinal problem","Neutrophill percentage","Neutrophill percentage","White blood cell (leukocyte) count","White blood cell (leukocyte) count","K74 Fibrosis and cirrhosis of liver","K74 Fibrosis and cirrhosis of liver","B15-B19 Viral hepatitis","Monocyte percentage","Neutrophill count","Neutrophill count","G43 Migraine","K60 Fissure and fistula of anal and rectal regions","dry eyes","dry eyes","Lymphocyte percentage","K20 Oesophagitis","osteomyelitis","K75 Other inflammatory liver diseases","B15-B19 Viral hepatitis","G44 Other headache syndromes","I85 Oesophageal varices","connective tissue disorder","K31 Other diseases of stomach and duodenum","H50 Other strabismus","gastritis/gastric erosions","rheumatic fever","Lymphocyte count","Lymphocyte count","Neutrophill percentage","Neutrophill percentage","White blood cell (leukocyte) count","Monocyte percentage","Monocyte percentage","hypothyroidism/myxoedema","hypothyroidism/myxoedema","M22 Disorders of patella","Monocyte count","Monocyte count","G91 Hydrocephalus","Lymphocyte percentage","blistering/desquamating skin disorder","peritonitis","Basophill count","Basophill count","Basophill percentage","Basophill percentage","Basophill percentage","Neutrophill percentage","White blood cell (leukocyte) count","White blood cell (leukocyte) count","Monocyte percentage","Neutrophill count","Neutrophill count","Neutrophill count","Monocyte count","Monocyte count","Lymphocyte percentage","Lymphocyte percentage","Eosinophill percentage","O20 Haemorrhage in early pregnancy","C67 Malignant neoplasm of bladder","White blood cell (leukocyte) count","Monocyte percentage","I45 Other conduction disorders","Eosinophill count","C64-C68 Malignant neoplasms of urinary tract","Monocyte count","Lymphocyte percentage","N80 Endometriosis","measles / morbillivirus","H18 Other disorders of cornea","L53 Other erythematous conditions","Reticulocyte percentage","Reticulocyte percentage","Standing height","Lymphocyte count","High light scatter reticulocyte percentage","High light scatter reticulocyte percentage","Immature reticulocyte fraction","High light scatter reticulocyte count","High light scatter reticulocyte count","Mean reticulocyte volume","Monocyte percentage","Monocyte percentage","L02 Cutaneous abscess, furuncle and carbuncle","malabsorption/coeliac disease","Reticulocyte count","Reticulocyte count","Monocyte count","Lymphocyte percentage"],"p-value":[8.3095e-10,8.6443e-29,6.2247e-17,1.4567e-27,1.3504e-16,5.31e-15,1.6018e-26,1.2209e-10,9.0308e-10,2.2105e-20,4.5753e-10,8.3821e-12,5.6534e-12,8.3772e-13,2.0741e-11,2.1054e-20,2.669e-14,8.6764e-11,3.8515e-12,1.1427e-41,1.4099e-29,3.8358e-41,6.0675e-28,3.9506e-28,3.1552e-14,2.5687e-14,4.0896e-31,2.3791e-35,5.6436e-09,9.7921e-09,1.1298e-17,8.3317e-12,3.5463e-12,3.5684e-15,8.1165e-09,2.0269e-10,3.3059e-22,2.1308e-16,5.2941e-21,3.5367e-17,1.789e-17,7.7736e-12,4.2311e-11,2.8925e-10,6.2134e-10,3.0457e-13,7.7966e-16,1.0452e-13,1.342e-09,4.4388e-33,8.694e-12,1.7874e-12,6.9563e-09,1.3806e-13,8.7902e-12,4.5908e-10,2.1682e-13,2.6876e-12,2.0339e-09,1.1335e-12,2.0219e-10,1.0644e-10,1.6778e-13,3.4817e-17,3.4338e-11,1.7648e-10,5.8032e-09,8.0642e-15,1.372e-35,1.1353e-09,5.3841e-13,2.3098e-09,7.1186e-16,2.6787e-09,1.2045e-10,9.9447e-17,1.5492e-19,8.7868e-11,5.3461e-30,3.1098e-09,5.669e-28,1.1299e-12,9.4345e-14,5.151e-15,1.1751e-39,8.8623e-09,3.2065e-09,9.4629e-09,3.0859e-16,1.8136e-10,2.7369e-11,9.147e-11,1.6997e-09,2.4495e-37,6.2601e-14,1.0171e-19,3.628e-12,4.3469e-28,1.414e-11,1.5379e-84,2.2396e-26,7.8762e-12,1.0813e-13,5.7701e-09,7.7699e-10,5.2483e-09,8.4051e-09,9.3164e-09,6.6526e-09,9.3942e-10,5.6804e-09,4.3557e-10,8.6436e-10,1.9512e-09,2.3025e-15,7.0021e-11,2.9162e-71,9.1167e-09,1.0174e-76,7.6673e-10,2.098e-27,1.5339e-21,4.6612e-30,5.0006e-32,6.9113e-99,6.7674e-12,2.0151e-10,4.2621e-09,8.8783e-21,2.8768e-43,1.4382e-62,1.93422302850252e-10,1.81153716211338e-13,2.28186289142763e-16,3.90574547335927e-13,2.71159429783845e-09,1.72536767807224e-10,6.54249239475843e-09,2.61147886605768e-11,1.33309371094207e-10,7.33231531281272e-09,1.05549538574803e-14,1.9627e-29,2.5528e-11,1.6395e-18,1.2604e-09,4.226e-13,5.7202e-53,2.82e-30,1.1313e-09,8.091e-09,3.905e-09,5.1526e-81,2.1812e-41,1.844e-09,7.4189e-10,3.9554e-16,4.053e-09,7.1625e-28,4.2174e-10,2.4192e-29,3.1729e-20,5.8492e-23,2.22e-41,6.014e-11,2.9005e-54,1.5066e-12,2.3192e-10,2.0906e-09,1.0343e-66,1.2602e-24,4.6667e-25,2.0384e-13,4.5833e-43,1.91e-18,4.6558e-12,1.2318e-28,4.5893e-14,4.2185e-233,1.1846e-10,2.681e-30,1.3256e-13,3.2655e-265,7.7304e-16,6.1412e-09,1.9925e-09,4.8702e-12,5.9463e-09,1.9832e-13,8.4696e-16,1.6741e-09,7.3464e-23,2.3804e-17,8.0035e-19,2.1396e-12,2.8503e-17,3.1671e-20,1.9868e-10,1.0514e-25,1.1342e-31,2.0969e-10,2.8649e-10,3.5315e-14,1.9545e-18,2.3434e-27,3.9886e-15],"consequence":["I63R","I63R","I63R","I63R","I56V","I63R","I63R","I63R","A14V","A14V","A14V","A23T","A5S","N29S","A5S","N29S","Y36H","Y36H","Y36H","Y36H","S31F","I29L","A102T","Q110E","A102T","Q110E","S31F","I29L","L18R","G3E","A113T","A113T","A113T","A113T","A113T","H18R","H18R","A113T","A113T","H18R","A70V","L24F","L24F","R3H","L24F","R3H","L24F","L24F","V25M","V25M","V25M","H69Y","G109R","G109R","G109R","G109R","L92V","L92V","L92V","L92V","S70L","E19K","E45D","E45D","E45D","E45D","E45D","A241D","A241D","A241D","A241D","T106S","S70N","S70N","K94Q","S70N","S70N","G355E","V64I","M249K","V64I","I222V","I222V","G324S","G324S","G324S","G324S","A364T","G345S","A364T","G345S","A364T","G345S","G345S","G345S","S357T","S357T","S357T","S357T","S357T","S357T","S357T","R333C","M268L","R144C","R333C","I283F","I283F","M268L","R333C","M268L","I283F","F211L","I283F","R153H","A241T","R153H","R248Q","R153H","R248Q","G79S","A241T","A241T","R153H","R153H","R248Q","A241T","A241T","G79S","A241T","R153H","N340T","V16F","R292Q","V16F","V16F","A76V","R292Q","N340T","T201I","R326Q","V16F","T280M","V249I","T280M","V249I","T280M","T280M","V249I","T280M","V249I","R318C","T280M","V249I","V147I","T280M","I255S","Q254H","G42D","A100T","G42D","A100T","R89C","R89C","G42D","R89C","G42D","G42D","A100T","R89C","G42D","R89C","G42D","R89C","V41A","I233T","L311V","V41A","V41A","L311V","V41A","L311V","V41A","V41A","V64L","V64L","R251Q","V78L","F167Y","V168M","V168M","V168M","F167Y","V168M","F167Y","F167Y","V168M","V168M","F167Y","I243V","L61F","I243V","F167Y","V168M","I243V","V168M"]},"columns":[{"id":"protein","name":"protein","type":"character"},{"id":"CCN or CRN","name":"CCN or CRN","type":"character"},{"id":"trait ID","name":"trait ID","type":"character"},{"id":"trait description","name":"trait description","type":"character"},{"id":"p-value","name":"p-value","type":"numeric"},{"id":"consequence","name":"consequence","type":"character"}],"filterable":true,"defaultPageSize":20,"dataKey":"69795745af404248ea1ee3af13e7ffb9"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="the-table-includes-the-following-columns"
+class="section level4">
+<h4>The table includes the following columns:</h4>
+<ul>
+<li><em>“protein”</em> - chemokine or GPCR</li>
+<li><em>“CCN or CRN”</em> - common chemokine or chemokine receptor
+numbering</li>
+<li><em>“trait ID”</em> - trait identifier</li>
+<li><em>“trait description”</em> - trait description</li>
+<li><em>“consequence”</em> - variant substitution and residue number
+associated with substitution (unprocessed, N-terminal numbering)</li>
+<li><em>“p-value”</em> - p-value associated with association</li>
+</ul>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

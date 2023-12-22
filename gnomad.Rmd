@@ -1,0 +1,38 @@
+## chemokine & GPCR **population-level variants**
+
+<br>
+
+#### Variant information for all human chemokines and receptors was gathered from >140,000 healthy individuals from the Genome Aggregation Database (GnomAD) (Karczewski et al., 2019, *Nature*; [https://gnomad.broadinstitute.org](https://gnomad.broadinstitute.org)). Only missense variants were considered.
+
+<br>
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+source("code/000_libraries.R")
+a <- read_csv("data/variant/gnomad/processed/CK_GNOMAD_TABLE.csv") %>%
+  dplyr::select(gene_symbol, ccn, Consequence, Allele.Count, Allele.Number,  Allele.Frequency)
+colnames(a) <- c("protein", "CCN or CRN", "consequence", "allele count",
+                    "allele number", "allele frequency")
+b <- read_csv("data/variant/gnomad/processed/CKR_GNOMAD_TABLE.csv") %>%
+  dplyr::select(gene_symbol, gn, Consequence, Allele.Count, Allele.Number,  Allele.Frequency)
+colnames(b) <- c("protein", "CCN or CRN", "consequence", "allele count",
+                    "allele number", "allele frequency")
+data <- rbind(a,b)
+```
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+reactable(data, filterable = TRUE, defaultPageSize = 20)
+
+```
+
+
+#### The table includes the following columns:  
+
+- *"protein"* - chemokine or GPCR
+- *"CCN or CRN"* - common chemokine or chemokine receptor numbering
+- *"consequence"* - variant substitution and residue number associated with substitution (unprocessed, N-terminal numbering); variants are listed using HGVS nomenclature [https://varnomen.hgvs.org/recommendations/general/](https://varnomen.hgvs.org/recommendations/general/)
+- *"allele count"* - number of instances in which given allele (i.e. variant) was identified in population
+- *"allele count"* - total alleles counted at the given position
+- *"allele frequency"* - fraction of instances in which allele is observed relative to the total alleles counted at the given position
+

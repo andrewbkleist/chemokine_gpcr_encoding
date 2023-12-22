@@ -1,0 +1,98 @@
+## chemokine-GPCR **interaction network** evidence
+
+<br>
+
+#### The table below is reproduced from **"Supplementary Table 1.xlsx"** associated with the manuscript. It compiles evidence for chemokine-GPCR interactions from the literature, including evidence supporting an interaction as well as evidence aginst an interaction. 
+
+<br>
+
+#### Summary statistics:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+source("code/000_libraries.R")
+data <- read.csv("data/network/Supplementary_Table_1.csv") %>%
+  select(chemokine, gpcr, author_date_journal, PMID, binding_kd_ki_nm, binding_ec50_ic50_nm, signaling_ec50_ic50_nm, chemotaxis_ec50_ic50_nm, chemotaxis_max_nm, ligand_type, interaction_strength, evidence_grade)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+cat(paste0("- ", "#### The number of unique chemokine-GPCR-evidence entries is **", nrow(data), "**"))
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+# pairings considered
+ck.gpcr.pairs <- data %>% select(chemokine, gpcr) %>% unique()
+cat(paste0("- ", "#### The number of unique chemokine-GPCR **pairings** considered (including **positive** & **negative** interactions) is ", 
+       nrow(ck.gpcr.pairs), " of a total of ", 46*23, 
+       " possible pairings, or **",
+       round(nrow(ck.gpcr.pairs)/(46*23)*100, digits = 0),
+       "%** of all possible chemokine-GPCR pairings"))
+rm(ck.gpcr.pairs)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+# positive pairings
+pos.ck.gpcr <- data %>% 
+  select(chemokine, gpcr, ligand_type, interaction_strength, evidence_grade) %>%
+  filter(interaction_strength %in% c(2,3)) %>%
+  select(chemokine, gpcr) %>% unique()
+cat(paste0("- ", "#### The number of **positive** chemokine-GPCR interactions for which evidence was gathered is ",
+       nrow(pos.ck.gpcr), " which is **",
+       round(nrow(pos.ck.gpcr)/(46*23)*100, digits = 0),
+       "%** of all possible chemokine-GPCR pairings"))
+# "positive" interactions are defined as Interaction Strength ≥ 2
+# and evidence of any grade
+rm(pos.ck.gpcr)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+# negative pairings
+neg.ck.gpcr <- data %>%
+  select(chemokine, gpcr, ligand_type, interaction_strength, evidence_grade) %>%
+  filter(interaction_strength %in% c(0))  %>%
+  select(chemokine, gpcr) %>% unique()
+cat(paste0("- ", "#### The number of **negative** chemokine-GPCR interactions for which evidence was gathered is ",
+       nrow(neg.ck.gpcr), " which is **",
+       round(nrow(neg.ck.gpcr)/(46*23)*100, digits = 0),
+       "%** of all possible chemokine-GPCR pairings"))
+# "positive" interactions are defined as Interaction Strength = 0
+# and evidence of any grade
+rm(neg.ck.gpcr)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+# literature sources
+lit <- data %>% select(PMID) %>% unique()
+cat(paste0("- ", "#### The number of unique literature **sources** is **", nrow(lit), "**"))
+rm(lit)
+```
+
+<br>
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+reactable(data, filterable = TRUE)
+```
+
+#### The table includes the following columns:  
+
+- *"chemokine"*  
+- *"chemokine_alternate_name"*  
+- *"gpcr"*  
+- *"PMID"* - PubMed ID  
+- *"author_date_journal"*  
+- *"binding_kd_nm"* - radioligand (or related) binding assay Kd listed in nanomolar  
+- *"binding_ec50_ic50_nm"* - radioligand (or related) binding assay EC50 or IC50 listed in nanomolar  
+- *"signaling_ec50_ic50_nm"* - signaling assay (e.g. calcium flux, B-arrestin recruitment) EC50 or IC50 listed in nanomolar  
+- *"chemotaxis_ec50_ic50_nm"* - chemotaxis EC50 or IC50 listed in nanomolar  
+- *"chemotaxis_max_nm"* - concentration at which maximal chemotaxis is achieved in nanonolar  
+- *"ligand_type"* - agonist, antagonist, or other based upon data presented in the associated source; ND = not determined  
+- *"interaction_strength"* - assigned based on parameters from Kd, Ki, EC50, or IC50 from binding, signaling, or chemotaxis assay; assigned as "3" for parameter ≤100nM, "2" for parameter ≤1000nM, "1" for parameter >1000nM but with evidence of functional effect at high concentration, and "0" for no effect; for sources for which multiple parameters are listed, the parameter with the lowest value (i.e. most potent) is used to make the assignment; ND = not determined  
+- *"evidence_grade"* - assigned based on type of evidence presented in source for/against listed interaction; assigned as "A" if a quantitative parameter was derived from concentration-response data (e.g. Kd, EC50, IC50, etc.), "B" if a semi-quantitative parameter was derived (e.g. dose of maximal chemotaxis), "C" if qualitative evidence is presented (e.g. single or multiple concentration point signaling assay without quantitative parameter), or "D" if indirect evidence is presented  
+
+#### Please see "Supplementary Table 1.xlsx" associated with the manuscript. Note that additional columns are included in that table including:
+
+- *"data_synopsis"* - direct quotations from text summarizing experimental data relating to interaction; for chemokines/GPCRs referenced in nonstandard names, the standardized chemokine/GPCR name is included in brackets  
+- *"data_comment"* - specifies signaling assay, binding assay, cells used, etc. 
+- *"other_comment"* - additional comments relating to the source, assignment of interaction strength/evidence grade  
+
+#### See the Methods section associated with the manuscript for more information.

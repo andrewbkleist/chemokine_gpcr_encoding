@@ -1,0 +1,36 @@
+## chemokine & GPCR **cancer-associated variants**
+
+<br>
+
+#### Variant information for all human chemokines and receptors was gathered from The Cancer Genoma Atlas (TCGA), which includes cancer-associated variants from >10,000 individuals and 33 different cancer types [https://www.cancer.gov/tcga](https://www.cancer.gov/tcga). Only missense variants were considered.
+
+<br>
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+source("code/000_libraries.R")
+a <- read_csv("data/variant/tcga/processed/CK_TCGA_COUNTS.csv")
+colnames(a)[2] <- c("CCN or CRN")
+b <- read_csv("data/variant/tcga/processed/CKR_TCGA_COUNTS.csv") %>%
+    separate(col = gn, into = c("a", "gn"), sep = "gn", remove = FALSE) %>%
+  dplyr::select(-a)
+colnames(b)[2] <- c("CCN or CRN")
+data <- rbind(a,b)
+data[is.na(data)] <- 0
+rm(a,b)
+colnames(data)[3] <- c("no. variants")
+```
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+reactable(data, filterable = TRUE, defaultPageSize = 20)
+
+```
+
+
+#### The table includes the following columns:  
+
+- *"protein"* - chemokine or GPCR
+- *"CCN or CRN"* - common chemokine or GPCR numbering
+- *"no. variants"* - number of cancer-associated variants identified in dataset among queried individuals
+

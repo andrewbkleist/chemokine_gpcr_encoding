@@ -1,0 +1,40 @@
+## chemokine & GPCR **phenotype- and disease-associated variants**
+
+<br>
+
+#### Variant information for all human chemokines and receptors was gathered for genome-wide statistical associations between variants and disease- or phenotypic-associated traits. Associations are based on data from ~500,000 individuals from the GeneATLAS database (made available via UK Biobank) (Canela-Xandri et al., 2018. *Nature Genetics*). Only missense variants were considered. All listed disease-/phenotype-associated variants are below thresholds for significance used in Canela-Xandri, et al. 2018.
+
+<br>
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+source("code/000_libraries.R")
+a <- read_csv("data/variant/geneatlas/processed/CK_GENEATLAS.csv") %>%
+  dplyr::select(Gene, ccn, Trait_Id, Trait_Description, P_value, AA_Consequences) %>%
+  filter(P_value < 1e-8)
+colnames(a) <- c("protein","CCN or CRN", "trait ID", "trait description", "p-value", "consequence")
+
+b <- read_csv("data/variant/geneatlas/processed/CKR_GENEATLAS.csv") %>%
+  dplyr::select(Gene, gn, Trait_Id, Trait_Description, P_value, AA_Consequences) %>%
+  filter(P_value < 1e-8)
+colnames(b) <- c("protein", "CCN or CRN", "trait ID", "trait description", "p-value", "consequence")
+data <- rbind(a,b)
+rm(a,b)
+```
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+reactable(data, filterable = TRUE, defaultPageSize = 20)
+
+```
+
+
+#### The table includes the following columns:  
+
+- *"protein"* - chemokine or GPCR
+- *"CCN or CRN"* - common chemokine or chemokine receptor numbering
+- *"trait ID"* - trait identifier
+- *"trait description"* - trait description
+- *"consequence"* - variant substitution and residue number associated with substitution (unprocessed, N-terminal numbering)
+- *"p-value"* - p-value associated with association

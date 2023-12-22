@@ -1,34 +1,25 @@
----
-title: "Encoding and decoding selectivity in the human chemokine-GPCR interaction network"
----
-This is my website
+## **chemokine selectivity** atlas
 
-```{r echo=FALSE, results='hide', message=FALSE}
-library(tidyverse)
-library(plotly)
+```{r, out.width='90%', fig.align='center', echo=FALSE}
+knitr::include_graphics('website_images/intro.png')
 ```
 
-Now this is my plot
-```{r echo=FALSE,message=FALSE}
-data <- read_csv("data/bihler_2023_clean.csv")
-q <- data %>%
-  # filter(variant %in% c("WT-ctrl", "G551D-ctrl", "G551D", "F508del","F508del-ctrl", "I507del")) %>%
-  # filter( (band_c_pct_wt_DMSO < 10) | (fsk_pct_wt_DMSO < 10)) %>%
-    filter(!(is.na(trikafta_response))) %>%
-  ggplot(aes(band_c_pct_wt_DMSO, fsk_pct_wt_DMSO, fill = trikafta_response, text  = variant)) +
-  geom_point(shape = 21, colour = "black", size = 5, stroke = 0.5) +
-  scale_fill_manual(values=c("red4", "grey70")) +
-  # xlim(0,20) + 
-  # ylim(0,20) + 
-  geom_vline(xintercept = c(10), linetype=2) +
-  geom_hline(yintercept = c(10), linetype=2) +
-  labs(y = "conductance (mean, % WT)", x = "folding (mean, % WT)") +
-  ggtitle("Variant-specific CFTR folding and conductance") +
+#### **Overview**
+In humans, selective interactions among 46 secreted **chemokines** and 23 cell-surface **G protein-coupled receptors (GPCRs)** coordinate **cell migration** in essential physiologic processes. Chemokines and GPCRs encode highly complex coupling networks despite conserved structural architectures among respective binding partners. *This web resource is intended to facilitate structure-function studies of chemokines and GPCRs and protein design efforts.*
 
-  theme_minimal()
-ggplotly(q)
-```
+<br>
 
+#### **This website features:**
+- Literature-curated chemokine-GPCR **interaction network**
+- **Generic numbering** systems for chemokines and GPCRs
+- **Short linear motifs (SLiMs**) for chemokine N-termini, GPCR N-termini, & GPCR ECL2
+- Naturally occurring, cancer-associated, and phenotype-associated **variants** for chemokines and GPCRs
+- Chemokine and GPCR **sequence alignments**
 
+<br>
 
-Hello, Website!
+##### **Contact us**
+Please email andrew.b.kleist@gmail.com (Andrew Kleist), bvolkman@mcw.edu (Brian Volkman), or madan.babu@stjude.org (Madan Babu)
+
+##### **Citation**
+This manuscript is being prepared for submission, we will update this section following publication
