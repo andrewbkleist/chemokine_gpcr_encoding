@@ -1,20 +1,44 @@
 name: "my-website"
 output_dir: "docs"
 navbar:
-  title: "Encoding and decoding selectivity in the human chemokine-GPCR interaction network"
   left:
-    - text: "Home"
+    - text: "home"
       href: index.html
-    - text: "Chemokine-GPCR network"
-      href: about.html
-    - text: "Readings"
-      href: readings.html 
+      
+    - text: "interaction network"
+      # href: network.html
       menu:
-      - text: "Module 1"
-        href: readings-module1.html
-      - text: "Module 2"
-        href: readings-module2.html
-
+      - text: "network viewer"
+        href: network-viewer.html
+      - text: "network evidence"
+        href: network-table.html
+        
+    - text: "common numbering"
+      menu:
+      - text: "common chemokine numbering (CCN)"
+        href: chemokine-numbering.html
+      - text: "common chemokine receptor numbering (CRN)"
+        href: gpcr-numbering.html
+        
+    - text: "unstructured regions"
+      menu:
+      - text: "chemokine N-terminus"
+        href: chemokine-nterm.html
+      - text: "GPCR N-terminus"
+        href: gpcr-nterm.html
+      - text: "GPCR ECL2"
+        href: gpcr-ecl2.html
+        
+    - text: "variant mapping"
+      menu:
+      - text: "The Cancer Genome Atlas"
+        href: tcga.html
+      - text: "GnomAD"
+        href: gnomad.html
+      - text: "GeneATLAS"
+        href: geneatlas.html
+        
+    
 output:
   html_document:
     theme: cosmo
