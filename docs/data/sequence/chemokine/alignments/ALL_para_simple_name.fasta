@@ -1,4 +1,4 @@
->ccl1_human
+>ccl1_human/1-96
 --------------------------------------MQIITTALVCLLLAGMWPEDVDSKSMQVPFSRC-
 --CFS--FAEQ-EI--PLR---AILCYRN---T-S--SI-CSN-E---------GLIFKL-K-R------GK
 EACALDTV--GWVQRHRKMLRHCPSKRK--------------------------------------------
@@ -6,7 +6,7 @@ EACALDTV--GWVQRHRKMLRHCPSKRK--------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl2_human
+>ccl2_human/1-99
 -------------------------------------MKVSAALLCLLLIAATFIPQGLAQPDAINAPVTC-
 --CYN--FTNR-KI--SVQ---RLASYRR---I-TS-SK-CPK-E---------AVIFKT-I-V------AK
 EICADPKQ--KWVQDSMDHLDKQTQTPKT-------------------------------------------
@@ -14,7 +14,7 @@ EICADPKQ--KWVQDSMDHLDKQTQTPKT-------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl3_human
+>ccl3_human/1-92
 -------------------------------------MQVSTAALAVLLCTMALCNQ-FSASLAADTPTAC-
 --CFS--YTSR-QI--PQN---FIADYFE---T-S--SQ-CSK-P---------GVIFLT-K-R------SR
 QVCADPSE--EWVQKYVSDLELSA------------------------------------------------
@@ -22,7 +22,7 @@ QVCADPSE--EWVQKYVSDLELSA------------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl3l1_human
+>ccl3l1_human/1-93
 -------------------------------------MQVSTAALAVLLCTMALCNQVLSAPLAADTPTAC-
 --CFS--YTSR-QI--PQN---FIADYFE---T-S--SQ-CSK-P---------SVIFLT-K-R------GR
 QVCADPSE--EWVQKYVSDLELSA------------------------------------------------
@@ -30,7 +30,7 @@ QVCADPSE--EWVQKYVSDLELSA------------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl4_human
+>ccl4_human/1-92
 -------------------------------------MKLCVTVLSLLMLVAAFCSPALSAPMGSDPPTAC-
 --CFS--YTAR-KL--PRN---FVVDYYE---T-S--SL-CSQ-P---------AVVFQT-K-R------SK
 QVCADPSE--SWVQEYVYDLELN-------------------------------------------------
@@ -38,7 +38,7 @@ QVCADPSE--SWVQEYVYDLELN-------------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl4l1_human
+>ccl4l1_human/1-92
 -------------------------------------MKLCVTVLSLLVLVAAFCSLALSAPMGSDPPTAC-
 --CFS--YTAR-KL--PRN---FVVDYYE---T-S--SL-CSQ-P---------AVVFQT-K-R------GK
 QVCADPSE--SWVQEYVYDLELN-------------------------------------------------
@@ -46,7 +46,7 @@ QVCADPSE--SWVQEYVYDLELN-------------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl5_human
+>ccl5_human/1-91
 --------------------------------------MKVSAAALAVILIATALCAPASASPYSSDTTPC-
 --CFA--YIAR-PL--PRA---HIKEYFY---T-S--GK-CSN-P---------AVVFVT-R-K------NR
 QVCANPEK--KWVREYINSLEMS-------------------------------------------------
@@ -54,7 +54,7 @@ QVCANPEK--KWVREYINSLEMS-------------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl7_human
+>ccl7_human/1-99
 -------------------------------------MKASAALLCLLLTAAAFSPQGLAQPVGINTSTTC-
 --CYR--FINK-KI--PKQ---RLESYRR---T-TS-SH-CPR-E---------AVIFKT-K-L------DK
 EICADPTQ--KWVQDFMKHLDKKTQTPKL-------------------------------------------
@@ -62,7 +62,7 @@ EICADPTQ--KWVQDFMKHLDKKTQTPKL-------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl8_human
+>ccl8_human/1-99
 -------------------------------------MKVSAALLCLLLMAATFSPQGLAQPDSVSIPITC-
 --CFN--VINR-KI--PIQ---RLESYTR---I-TN-IQ-CPK-E---------AVIFKT-K-R------GK
 EVCADPKE--RWVRDSMKHLDQIFQNLKP-------------------------------------------
@@ -70,15 +70,15 @@ EVCADPKE--RWVRDSMKHLDQIFQNLKP-------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl11_human
--------------------------------------MKVSAALLWLLLIAAAFSPQGLAGPASVPTT--C-
+>ccl11_human/1-97
+---------------------------------------MKVSAALLWLLLIAAAFSPQGLAGPASVPTTC-
 --CFN--LANR-KI--PLQ---RLESYRR---I-TS-GK-CPQ-K---------AVIFKT-K-L------AK
 DICADPKK--KWVQDSMKYLDQKSPTPKP-------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl13_human
+>ccl13_human/1-98
 -------------------------------------MKVSAVLLCLLLMTAAFNPQGLAQPDALNVPSTC-
 --CFT--FSSK-KI--SLQ---RLKSYVI---T-T--SR-CPQ-K---------AVIFRT-K-L------GK
 EICADPKE--KWVQNYMKHLGRKAHTLKT-------------------------------------------
@@ -86,7 +86,7 @@ EICADPKE--KWVQNYMKHLGRKAHTLKT-------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl14_human
+>ccl14_human/1-109
 --------------------MKISVAAIPFFLLITIALGTKTESSSQTGGKPKVVKIQLKLVGGPYHPSEC-
 --CFT--YTTY-KI--PRQ---RIMDYYE---T-N--SQ-CSK-P---------GIVFIT-K-R------GH
 SVCTNPSD--KWVQDYIKDMKEN-------------------------------------------------
@@ -94,7 +94,7 @@ SVCTNPSD--KWVQDYIKDMKEN-------------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl15_human
+>ccl15_human/1-113
 ------------------MKVSVAALSCLMLVAVLGSQAQFTNDAETELMMSKLPLENPVVLNSFHFAADC-
 --CTS--YISQ-SI--PCS---LMKSYFE---T-S--SE-CSK-P---------GVIFLT-K-K------GR
 QVCAKPSG--PGVQDCMKKLKPYSI-----------------------------------------------
@@ -102,7 +102,7 @@ QVCAKPSG--PGVQDCMKKLKPYSI-----------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl16_human
+>ccl16_human/1-120
 ----------------------------------MKVSEAALSLLVLILIITSASRSQPKVPEWVNTPSTC-
 --CLK--YYEK-VL--PRR---LVVGYRK---A-L--N--CHL-P---------AIIFVT-K-R------NR
 EVCTNPND--DWVQEYIKDPNLPLLPTRNLSTVKIITAKNGQPQLLNSQ-----------------------
@@ -110,7 +110,7 @@ EVCTNPND--DWVQEYIKDPNLPLLPTRNLSTVKIITAKNGQPQLLNSQ-----------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl17_human
+>ccl17_human/1-94
 --------------------------------------MAPLKMLALVTLLLGASLQHIHAARGTNVGREC-
 --CLE--YFKG-AI--PLR---KLKTWYQ---T-S--ED-CSR-D---------AIVFVT-V-Q------GR
 AICSDPNN--KRVKNAVKYLQSLERS----------------------------------------------
@@ -118,7 +118,7 @@ AICSDPNN--KRVKNAVKYLQSLERS----------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl18_human
+>ccl18_human/1-89
 -----------------------------------------MKGLAAALLVLVCTMALCSCAQVGTNKELC-
 --CLV--YTSW-QI--PQK---FIVDYSE---T-S--PQ-CPK-P---------GVILLT-K-R------GR
 QICADPNK--KWVQKYISDLKLNA------------------------------------------------
@@ -126,7 +126,7 @@ QICADPNK--KWVQKYISDLKLNA------------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl19_human
+>ccl19_human/1-104
 ------------------------------------------MALLLALSLLVLWTSPAPTLSGTNDAEDC-
 --CLS--VT-QKPI--PGY---IVRNFHY---L-LIKDG-CRV-P---------AVVFTT-L-R------GR
 QLCAPPDQ--PWVERIIQRLQRTSAKASLALPGPVSSL----------------------------------
@@ -134,7 +134,7 @@ QLCAPPDQ--PWVERIIQRLQRTSAKASLALPGPVSSL----------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl20_human
+>ccl20_human/1-96
 ---------------------------------------MCCTKSLLLAALMSVLLLHLCGESEAASNFDC-
 --CLG--YTDR-IL--HPK---FIVGFTR---Q-LANEG-CDI-N---------AIIFHT-K-K------KL
 SVCANPKQ--TWVKYIVRLLSKKVKNM---------------------------------------------
@@ -142,7 +142,7 @@ SVCANPKQ--TWVKYIVRLLSKKVKNM---------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl21_human
+>ccl21_human/1-134
 ----------------------------------------MAQSLALSLLILVLAFGIPRTQGSDGGAQDC-
 --CLK--YSQR-KI--PAK---VVRSYRK---Q-EPSLG-CSI-P---------AILFLP-R-K----RSQA
 ELCADPKE--LWVQQLMQHLDKTPSPQKPAQGCRKDRGASKTGKKGKGSKGCKRTERSQTPKGP--------
@@ -150,7 +150,7 @@ ELCADPKE--LWVQQLMQHLDKTPSPQKPAQGCRKDRGASKTGKKGKGSKGCKRTERSQTPKGP--------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl22_human
+>ccl22_human/1-93
 -----------------------------------MDRLQTALLVVLVLLAVALQATEAGPYGANMEDSVC-
 --CRD--YVRY-RL--PLR---VVKHFY----W-TS-DS-CPR-P---------GVVLLT-F-R------DK
 EICADPRV--PWVKMILNKLSQ--------------------------------------------------
@@ -158,7 +158,7 @@ EICADPRV--PWVKMILNKLSQ--------------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl23_human
+>ccl23_human/1-137
 MKVSVAALSCLMLVTALGSQARVTKDAETEFMMSKLPLENPVLLDMLWRRKIGPQMTLSHAAGFHATSADC-
 --CIS--YTPR-SI--PCS---LLESYFE---T-N--SE-CSK-P---------GVIFLT-K-K------GR
 RFCANPSD--KQVQVCMRMLKLDTRIKTRKN-----------------------------------------
@@ -166,7 +166,7 @@ RFCANPSD--KQVQVCMRMLKLDTRIKTRKN-----------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl24_human
+>ccl24_human/1-119
 --------------------------------------MAGLMTIVTSLLFLGVCAHHIIPTGSVVIPSPC-
 --CMF--FVSK-RI--PEN---RVVSYQL---S-SR-ST-CLK-A---------GVIFTT-K-K------GQ
 QFCGDPKQ--EWVQRYMKNLDAKQKKASPRARAVAVKGPVQRYPGNQTTC----------------------
@@ -174,7 +174,7 @@ QFCGDPKQ--EWVQRYMKNLDAKQKKASPRARAVAVKGPVQRYPGNQTTC----------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl25_human
+>ccl25_human/1-150
 -----------------------------------------MNLWLLACLVAGFLGAWAPAVHTQGVFEDC-
 --CLA--Y-HY-PI--GWA---VLRRAWTYRIQEVS-GS-CNL-P---------AAIFYL-PKR------HR
 KVCGNPKS--REVQRAMKLLDARNKVFAKLHHNTQTFQAGPHAVKKLSSGNSKLSSSKFSNPISSSKRNVSL
@@ -182,7 +182,7 @@ LISANSGL----------------------------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl26_human
+>ccl26_human/1-94
 --------------------------------------MMGLSLASAVLLASLLSLHLGTATRGSDISKTC-
 --CFQ--YSHK-PL--PWT---WVRSYEF---T-S--NS-CSQ-R---------AVIFTT-K-R------GK
 KVCTHPRK--KWVQKYISLLKTPKQL----------------------------------------------
@@ -190,7 +190,7 @@ KVCTHPRK--KWVQKYISLLKTPKQL----------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl27_human
+>ccl27_human/1-112
 --------------------------------------MKGPPTFCSLLLLSLLLSPDPTAAFLLPPSTAC-
 --CTQ--LYRK-PL--SDKLLRKVIQVEL---Q-EADGD-CHL-Q---------AFVLHL-A--------QR
 SICIHPQN--PSLSQWFEHQERKLHGTLPKLNFGMLRKMG--------------------------------
@@ -198,7 +198,7 @@ SICIHPQN--PSLSQWFEHQERKLHGTLPKLNFGMLRKMG--------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->ccl28_human
+>ccl28_human/1-127
 -----------------------------------------MQQRGLAIVALAVCAALHASEAILPIASSC-
 --CTE--VSHH-ISRRLLE---RVNMCRI---Q-RADGD-CDL-A---------AVILHV-K--------RR
 RICVSPHN--HTVKQWMKVQAAKKNGKGNVCHRKKHHGKRNSNRAHQGKHETYGHKTPY-------------
@@ -206,7 +206,7 @@ RICVSPHN--HTVKQWMKVQAAKKNGKGNVCHRKKHHGKRNSNRAHQGKHETYGHKTPY-------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl1_human
+>cxcl1_human/1-107
 ----------------------------MARAALSAAPSNPRLLRVALLLLLLVAAGRRAAGASVATELRC-
 -QCLQ--TL-Q-GI--HPK---NIQSVNV---K-SPGPH-CAQ-T---------EVIATL-K-N------GR
 KACLNPAS--PIVKKIIEKMLNSDKSN---------------------------------------------
@@ -214,7 +214,7 @@ KACLNPAS--PIVKKIIEKMLNSDKSN---------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl2_human
+>cxcl2_human/1-107
 ----------------------------MARATLSAAPSNPRLLRVALLLLLLVAASRRAAGAPLATELRC-
 -QCLQ--TL-Q-GI--HLK---NIQSVKV---K-SPGPH-CAQ-T---------EVIATL-K-N------GQ
 KACLNPAS--PMVKKIIEKMLKNGKSN---------------------------------------------
@@ -222,7 +222,7 @@ KACLNPAS--PMVKKIIEKMLKNGKSN---------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl3_human
+>cxcl3_human/1-107
 ----------------------------MAHATLSAAPSNPRLLRVALLLLLLVAASRRAAGASVVTELRC-
 -QCLQ--TL-Q-GI--HLK---NIQSVNV---R-SPGPH-CAQ-T---------EVIATL-K-N------GK
 KACLNPAS--PMVQKIIEKILNKGSTN---------------------------------------------
@@ -230,7 +230,7 @@ KACLNPAS--PMVQKIIEKILNKGSTN---------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl4_human
+>cxcl4_human/1-101
 ------------------------------MSSAAGFCASRPGLLFLGLLLLPLVVAFASAEAEEDGDLQC-
 -LCVK--TT-S-QV--RPR---HITSLEV---I-KAGPH-CPT-A---------QLIATL-K-N------GR
 KICLDLQA--PLYKKIIKKLLES-------------------------------------------------
@@ -238,7 +238,7 @@ KICLDLQA--PLYKKIIKKLLES-------------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl4l1_human
+>cxcl4l1_human/1-104
 ---------------------------MSSAARSRLTRATRQEMLFLALLLLPVVVAFARAEAEEDGDLQC-
 -LCVK--TT-S-QV--RPR---HITSLEV---I-KAGPH-CPT-A---------QLIATL-K-N------GR
 KICLDLQA--LLYKKIIKEHLES-------------------------------------------------
@@ -246,9 +246,15 @@ KICLDLQA--LLYKKIIKEHLES-------------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl5_human
-----------------------MSLLSSRAARVPGPSSSLCALLVLLLLLTQPGPIASAGPAAAVLRELRC--VCLQ--TT-Q-GV--HPK---MISNLQV---F-AIGPQ-CSK-V---------EVVASL-K-N------GKEICLDPEA--PFLKKVIQKILDGGNKEN------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
->cxcl6_human
+>cxcl5_human/1-114
+----------------------MSLLSSRAARVPGPSSSLCALLVLLLLLTQPGPIASAGPAAAVLRELRC-
+-VCLQ--TT-Q-GV--HPK---MISNLQV---F-AIGPQ-CSK-V---------EVVASL-K-N------GK
+EICLDPEA--PFLKKVIQKILDGGNKEN--------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+----------------------------------------
+>cxcl6_human/1-114
 ----------------------MSLPSSRAARVPGPSGSLCALLALLLLLTPPGPLASAGPVSAVLTELRC-
 -TCLR--VT-L-RV--NPK---TIGKLQV---F-PAGPQ-CSK-V---------EVVASL-K-N------GK
 QVCLDPEA--PFLKKVIQKILDSGNKKN--------------------------------------------
@@ -256,7 +262,7 @@ QVCLDPEA--PFLKKVIQKILDSGNKKN--------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl7_human
+>cxcl7_human/1-128
 --------MSLRLDTTPSCNSARPLHALQVLLLLSLLLTALASSTKGQTKRNLAKGKEESLDSDLYAELRC-
 -MCIK--TT-S-GI--HPK---NIQSLEV---I-GKGTH-CNQ-V---------EVIATL-K-D------GR
 KICLDPDA--PRIKKIVQKKLAGDESAD--------------------------------------------
@@ -264,7 +270,7 @@ KICLDPDA--PRIKKIVQKKLAGDESAD--------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl8_human
+>cxcl8_human/1-99
 -------------------------------------MTSKLAVALLAAFLISAALCEGAVLPRSAKELRC-
 -QCIK--TYSK-PF--HPK---FIKELRV---I-ESGPH-CAN-T---------EIIVKL-S-D------GR
 ELCLDPKE--NWVQRVVEKFLKRAENS---------------------------------------------
@@ -272,7 +278,7 @@ ELCLDPKE--NWVQRVVEKFLKRAENS---------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl9_human
+>cxcl9_human/1-125
 ----------------------------------------MKKSGVLFLLGIILLVLIGVQGTPVVRKGRC-
 -SCIS--TNQG-TI--HLQ---SLKDLKQ---F-APSPS-CEK-I---------EIIATL-K-N------GV
 QTCLNPDS--ADVKELIKKWEKQVSQKKKQKNGKKHQKKKVLKVRKSQRSRQKKTT----------------
@@ -280,9 +286,15 @@ QTCLNPDS--ADVKELIKKWEKQVSQKKKQKNGKKHQKKKVLKVRKSQRSRQKKTT----------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl10_human
------------------------------------------MNQTAILICCLIFLTLSGIQGVPLSRTVRC--TCIS--ISNQ-PV--NPR---SLEKLEI---I-PASQF-CPR-V---------EIIATM-KKK------GEKRCLNPES--KAIKNLLKAVSKERSKRSP-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
->cxcl11_human
+>cxcl10_human/1-98
+-----------------------------------------MNQTAILICCLIFLTLSGIQGVPLSRTVRC-
+-TCIS--ISNQ-PV--NPR---SLEKLEI---I-PASQF-CPR-V---------EIIATM-KKK------GE
+KRCLNPES--KAIKNLLKAVSKERSKRSP-------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+----------------------------------------
+>cxcl11_human/1-94
 -----------------------------------------MSVKGMAIALAVILCATVVQGFPMFKRGRC-
 -LCIG--PGVK-AV--KVA---DIEKASI---M-YPSNN-CDK-I---------EVIITL-KEN------KG
 QRCLNPKS--KQARLIIKKVERKNF-----------------------------------------------
@@ -290,7 +302,7 @@ QRCLNPKS--KQARLIIKKVERKNF-----------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl12_human
+>cxcl12_human/1-119
 -----------------------------------------MNAKVVVVLVLVLTALCLSDGKPVSLSYRC-
 -PCRF--FE-S-HV--ARA---NVKHLKI---L--NTPN-C-A-L---------QIVARL-KNN------NR
 QVCIDPKL--KWIQEYLEKALNKGRREEKVGKKEKIGKKKRQKKRKAAQKRKN-------------------
@@ -298,7 +310,7 @@ QVCIDPKL--KWIQEYLEKALNKGRREEKVGKKEKIGKKKRQKKRKAAQKRKN-------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl13_human
+>cxcl13_human/1-108
 --------------------------------------MKFISTSLLLMLLVSSLSPVQGVLEVYYTSLRC-
 -RCVQ--ESSV-FI--PRR---FIDRIQI---L-PRGNG-CPR-K---------EIIVWK-K-N------KS
 IVCVDPQA--EWIQRMMEV-RKRSSSTLPVPVFKRKIP----------------------------------
@@ -306,7 +318,7 @@ IVCVDPQA--EWIQRMMEV-RKRSSSTLPVPVFKRKIP----------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl14_human
+>cxcl14_human/1-111
 ----------------------------------MSLLPRRAPPVSMRLLAAALLLLLLALYTARVDGSKC-
 -KCSR--KG-P-KI--RYS---DVKKLEM---K-PKYPH-CEE-KM--------VIITTK-SVSRYR---GQ
 EHCLHPKL--QSTKRFIKWYNAWNEKRRVYEE----------------------------------------
@@ -314,7 +326,7 @@ EHCLHPKL--QSTKRFIKWYNAWNEKRRVYEE----------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl16_human
+>cxcl16_human/1-273
 --------------MSGSQSEVAPSPQSPRSPEMGRDLRPGSRVLLLLLLLLLVYLTQPGNGNEGSVTGSC-
 -YCGK--RISS-DS--PPS---VQFMNRL-RKHLRAYHR-CLY-YT-------RFQLLSW------------
 SVCGGNKD--PWVQELMSCLDLKECGHAYSGIVAHQKHLLPTSPPISQASEGASSDIHTPAQMLLSTLQSTQ
@@ -322,7 +334,7 @@ RPTLPVGSLSSDKELTRPNETTIHTAGHSLAAGPEAGENQKQPEKNAGPTARTSATVPVLCLLAIIFILTAA
 LSYVLCKRRRGQSPQSSPDLPVHYIPVAPDSNT---------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cxcl17_human
+>cxcl17_human/1-119
 --------------------MKVLISSLL-LLLPLMLMSMVSSSLNPGVARGHRDRGQASRRWLQEGGQEC-
 -ECKD--WFL--RA--PRR----KFMTVS-GLP-KKQCP-CDH-FKGNVKKTRHQRHHRK-PNK------HS
 RACQQFLK--QCQLRSFALPL---------------------------------------------------
@@ -330,7 +342,7 @@ RACQQFLK--QCQLRSFALPL---------------------------------------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->cx3cl1_human
+>cx3cl1_human/1-403
 ---------------------------------MAPISLSWLLRLATFCHLTVLLAGTSLNSGQHHGVTKCN
 ITCSK--MT-S-KI--PVA---LLIHYQQ---N-Q--AS-CGK-RA--------IILETR---Q------HR
 LFCADPKE--QWVKDAMQHLDRQAAALTRNGGTFEKQIGEVKPRTTPAAGGMDESVVLEPEATGESSSLEPT
@@ -338,7 +350,7 @@ PSSQEAQRALGTSPELPTGVTGSSGTRLPPTPKAQDGGPVGTELFRVPPVSTAATWQSSAPHQPGPSLWAEA
 KTSEAPSTQDPSTQASTASSPAPEENAPSEGQRVWGQGQSPRPENSLEREEMGPVPAHTDAFQDWGPGSMAH
 VSVVPVSSEGTPSREPVASGSWTPKAEEPIHATMDPQRLGVLITPVPDAQAATRRQAVGLLAFLGLLFCLGV
 AMFTYQSLQGCPRKMAGEMAEGLRYIPRSCGSNSYVLVPV
->xcl1_human
+>xcl1_human/1-114
 ----------------------------------------MRLLILALLGICSLTAYIVEGVGSEVSDKR--
 -TCVS--LTTQ-RL--PVS---RIKTYTI---T-EG-----SL-R---------AVIFIT-K-R------GL
 KVCADPQA--TWVRDVVRSMDRKSNTRNNMIQTKPTGTQQSTNTAVTLTG----------------------
@@ -346,7 +358,7 @@ KVCADPQA--TWVRDVVRSMDRKSNTRNNMIQTKPTGTQQSTNTAVTLTG----------------------
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ----------------------------------------
->xcl2_human
+>xcl2_human/1-114
 ----------------------------------------MRLLILALLGICSLTAYIVEGVGSEVSHRR--
 -TCVS--LTTQ-RL--PVS---RIKTYTI---T-EG-----SL-R---------AVIFIT-K-R------GL
 KVCADPQA--TWVRDVVRSMDRKSNTRNNMIQTKPTGTQQSTNTAVTLTG----------------------

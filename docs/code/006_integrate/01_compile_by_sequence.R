@@ -53,7 +53,7 @@ ck.master <- left_join(ck.master, aln)
 rm(aln)
 
 # write csv
-# write_csv(ck.master, "data/integrated/CK_CONS_CCCXC_SNP_CAN.csv") # LAST WRITTEN 20230930
+# write_csv(ck.master, "data/integrated/CK_CONS_CCCXC_SNP_CAN.csv") # LAST WRITTEN 20231225
 rm(ck.master)
 
 # (2) RECEPTOR -----------------------------------------------------------------

@@ -14,6 +14,9 @@
 # Mstatx commands run using variations on the following command locally via
 # command line terminal:
 # mstatx -i ALL_para.fasta -s trident -m /Applications/MstatX-master/data/aaindex/HENS920102.mat -o ALL_para.txt
+# (if doesn't work try going to /Users/akleist in terminal window (not R terminal) and running
+# mstatx -i /Users/akleist/Desktop/Volkman_Lab/BABU_VOLKMAN/CHEMOKINE_PRJ/Data/chemokine_gpcr_encoding/data/sequence/chemokine/alignments/ALL_para.fasta -s trident -m /Applications/MstatX-master/data/aaindex/HENS920102.mat -o /Users/akleist/Desktop/Volkman_Lab/BABU_VOLKMAN/CHEMOKINE_PRJ/Data/chemokine_gpcr_encoding/data/sequence/chemokine/alignments/ALL_para.txt)
+# (worked as of 12/22/23)
 #
 # Validated that scores are accurately assigned to columns via N-term spot
 # checks - checked 0's appropriately assigned in data frame based on gapped
@@ -294,12 +297,12 @@ rm(gaps)
 
 # clean chemokine name
 data <- data %>% separate(protein, into = c("protein", "b"), sep = "_") %>%
-  select(-b)
+  dplyr::select(-b)
 data$protein <- toupper(data$protein)
 
 # (3) REORDER, WRITE OUTPUT ----------------------------------------------------
-data <- data %>% select(protein, ccn, dom, all_para, all_cc_cxc_para,
+data <- data %>% dplyr::select(protein, ccn, dom, all_para, all_cc_cxc_para,
                         cc_para, cxc_para, ortho_cons, ngaps, pctgaps)
 
-# write_csv(data, "data/sequence/chemokine/processed/CK_CONSERVATION.csv") # LAST WRITTEN 20230924
+# write_csv(data, "data/sequence/chemokine/processed/CK_CONSERVATION.csv") # LAST WRITTEN 20231222
 

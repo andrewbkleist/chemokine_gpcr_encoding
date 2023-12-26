@@ -19,7 +19,7 @@ ck.table <- data.frame(gene_symbol = name.ck, aln = aln.ck, stringsAsFactors=F) 
 
 # write output
 # write_csv(ck.table, "data/sequence/chemokine/alignment_csv/CK_SEQ_TABLE.csv")
-# WRITTEN 20230929
+# WRITTEN 20231224
 
 # (2) RECEPTOR -----------------------------------------------------------------
 # import

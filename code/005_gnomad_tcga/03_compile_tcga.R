@@ -148,9 +148,8 @@ cancer.muts.ckr.table <- cancer.muts.ckr.matrix %>%
   gather(gn, cancer_mut_count, 2:ncol(cancer.muts.ckr.matrix))
 
 # write
-# write_csv(cancer.muts.ck.table, "data/variant/tcga/processed/CK_TCGA_COUNTS.csv")
-# write_csv(cancer.muts.ckr.table, "data/variant/tcga/processed/CKR_TCGA_COUNTS.csv")
-# WRITTEN 20230929
+# write_csv(cancer.muts.ck.table, "data/variant/tcga/processed/CK_TCGA_COUNTS.csv") # WRITTEN 20231225
+# write_csv(cancer.muts.ckr.table, "data/variant/tcga/processed/CKR_TCGA_COUNTS.csv") # WRITTEN 20230929
 
 # remove used objects
 rm(cancer.muts.ck.matrix, cancer.muts.ckr.matrix, cancer.muts.parsed,

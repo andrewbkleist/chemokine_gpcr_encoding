@@ -25,11 +25,59 @@ data <- data %>%
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
+# reactable(data, filterable = TRUE, defaultPageSize = 23,
+#           columns = list(
+#             protein = colDef(style = list(position = "sticky",left = 0,
+#                                           background ="#fff", zIndex = 1))
+#   ))
+
+# (1) COLOR ASSIGNMENT
+# function that assigns colors to AAs
+ResidueZappo <-  function(value){
+  color <- case_when(
+    value %in% c("R","K","H") ~ "lightblue",
+    value %in% c("D","E") ~ "red",
+    value %in% c("N","Q","S","T") ~ "lightgreen",
+    value %in% c("G","P") ~ "mediumslateblue",
+    value %in% c("C") ~ "yellow",
+    value %in% c("F","W","Y") ~ "gold",
+    value %in% c("A","I","L","M","V") ~ "pink")
+}
+
+# function that assigns above function to "background" variable
+stylefunc <- function(value) {
+  color <- ResidueZappo(value)
+  list(background = color)
+}
+
+# list giving column formatting (using style function)
+coldefs <- list(
+  reactable::colDef(style = stylefunc)
+)
+# get names of cols to format
+numcols <- data %>% dplyr::select(2:ncol(data)) %>% colnames()
+# replicate list to required length
+coldefs <- rep(coldefs,length(numcols))
+# name elements of list according to cols
+names(coldefs) <- numcols
+
+# (2) "STICKY COL" ASSIGNMENT
+# now assign second formatting for "sticky" cols
+coldefs2 <- list(
+  reactable::colDef(style = list(position = "sticky",left = 0, background ="#fff", zIndex = 1)))
+
+# (3) MERGE FORMATTING
+# merge
+coldefs <- c(coldefs2, coldefs)
+
+# rename
+numcols <- data %>% dplyr::select(1:ncol(data)) %>% colnames()
+names(coldefs) <- numcols
+
+# (4) MAKE TABLE
+# make table      
 reactable(data, filterable = TRUE, defaultPageSize = 23,
-          columns = list(
-            protein = colDef(style = list(position = "sticky",left = 0,
-                                          background ="#fff", zIndex = 1))
-  ))
+          columns = coldefs)
 
 ```
 

@@ -51,7 +51,7 @@ data <- data %>% dplyr::select(protein, seq, class, NTc.Cm70:CT.308)
 
 # write output
 # write_csv(data, "data/sequence/chemokine/alignment_csv/ALL_cc_cxc_ortho_df.csv")
-# LAST WRITTEN 20230924
+# LAST WRITTEN 20231222
 rm(data)
 
 # (2) MAKE "TEST SET" CONTAINING CHEMOKINE PARALOGS ----------------------------
@@ -80,7 +80,7 @@ data <- data %>% dplyr::select(protein, seq, class, NTc.Cm70:CT.308)
 
 # write output
 # write_csv(data, "data/sequence/chemokine/alignment_csv/ALL_para_df.csv")
-# LAST WRITTEN 20230924
+# LAST WRITTEN 20231222
 rm(data)
 
 # (3)  MAKE "TEST SET" CONTAINING VIRAL CHEMOKINES -----------------------------
@@ -102,6 +102,6 @@ data <- data %>% dplyr:select(protein, seq, class, NTc.Cm70:CT.308)
 
 # write
 # write_csv(data, "data/sequence/chemokine/alignment_csv/ALL_virus_df.csv")
-# LAST WRITTEN 20230924
+# LAST WRITTEN 20231224
 rm(data)
 

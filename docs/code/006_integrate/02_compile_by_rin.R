@@ -119,8 +119,8 @@ colnames(ckr.cons) <- c("ckr", "target_gnccn","dom2", "all_para_ckr", "all_non_a
                         "cc_cxc_lr_ckr", "cc_cxc_lr_sd_ckr", "cc_cxc_lr_score_ckr", 
                         "cc_cxc_lr_score_sd_ckr",
                         "snp_count_ckr", "snp_freq_count_ckr", 
-                        "cancer_mut_count_ckr")
-ckr.cons <- ckr.cons  %>% separate(target_gnccn, sep = "gn", into  = c("temp","target_gnccn"))
+                        "cancer_mut_count_ckr", "resid")
+ckr.cons <- ckr.cons %>% separate(col = target_gnccn,  into  = c("temp","target_gnccn"), sep = "gn", remove = FALSE)
 ckr.cons <- ckr.cons  %>% dplyr::select(-temp)
 
 ckr.ortho.cons <- ckr.cons %>% dplyr::select(ckr, target_gnccn, ortho_cons_ckr) %>% 
@@ -325,5 +325,5 @@ rin <- rin %>%
          cancer_mut_count_ck, cancer_mut_count_ckr)
 
 # write
-# write_csv(rin, "data/integrated/RIN_CONS_CLASS.csv") # LAST WRITTEN 20230930
+# write_csv(rin, "data/integrated/RIN_CONS_CLASS.csv") # LAST WRITTEN 20231225
 

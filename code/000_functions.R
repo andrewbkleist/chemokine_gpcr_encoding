@@ -23,6 +23,37 @@ Align2DataFrame <- function(ALIGNMENT, NAMES){
   rm(aln, aln.df, gnccn, seqname)
 }
 
+BuildTrainTest <- function(FILE, SEED, TRAIN.PCT){
+  
+  data <- read.csv(FILE, colClasses = "factor") # all colums *MUST* be factors (20200922 troubleshoot)
+  data <- data[, sapply(data, nlevels) > 1] # avoids errors from single factor columns by removing
+  data <- data %>% dplyr::select(-protein, -seq)
+  
+  # define classes
+  A <- data %>% filter(class == "cc")
+  B <- data %>% filter(class == "cxc")
+  
+  # random selection of training rows
+  set.seed(SEED)  # for repeatability of samples
+  rows.A <- sample(1:nrow(A), TRAIN.PCT*nrow(B))  # deliberate B for even sampling
+  rows.B <- sample(1:nrow(B), TRAIN.PCT*nrow(B))
+  train.A <- A[rows.A, ]
+  train.B <- B[rows.B, ]
+  train <- rbind(train.A, train.B)  # row bind the 1's and 0's
+  
+  # define test rows
+  test.A <- A[-rows.A, ]
+  test.B <- B[-rows.B, ]
+  test.A <- sample_n(test.A, nrow(test.B)) # match row numbers
+  
+  test <- rbind(test.A, test.B)  # row bind the 1's and 0's
+  train$cat <- c("train")
+  test$cat <- c("test")
+  all <- rbind(train, test)
+  return(all)
+  rm(A, B, rows.A, rows.B, train.A, train.B, all, test.A, test.B, all)
+}
+
 FormatVariantsGnomad <- function(var_table) {
   
   # define variants
@@ -957,6 +988,232 @@ LoadAtlas <- function(PCA.OUTPUT, LOOK.OBJ.RES, LOOK.OBJ.NAME,
   ckr <- LoadAtlasCKR(PCA.OUTPUT, LOOK.OBJ.RES, LOOK.OBJ.NAME, 
                       LOOK.LIG.RES, LOOK.LIG.NAME, PDBOBJ, CLASS)
   master <- rbind(inter, ck, ckr)
+}
+
+LogResAcc <- function(TRAIN, TEST){
+  results <- data.frame()
+  
+  for(i in names(TRAIN)[2:ncol(TRAIN)]){
+    
+    # (1) MAKE MODEL
+    # see http://r-statistics.co/Logistic-Regression-With-R.html
+    #--
+    # i <- "NTc.Cm69"
+    # TRAIN <- train
+    # TEST <- test
+    #--
+    fmla <- as.formula(paste0("class ~ ", i))
+    logitMod <- glm(fmla, data=TRAIN, family=binomial(link="logit"))
+    
+    # (2) REMOVE ROWS FROM "TEST" CONTAINING FACTORS NOT IN "TRAIN"
+    cmd <- noquote(paste0("factors.in.train <- c(logitMod$xlevels$", i, ")"))
+    eval(parse(text = cmd))
+    TEST <- TEST %>% filter(TEST[,i] %in% c(factors.in.train))
+        # model.factors <- c(logitMod$xlevels$NTc.Cm69)
+        # TEST <- TEST %>% filter(NTc.Cm69 %in% c(model.factors))
+    
+    # evaluate model on test / convert to table
+    predicted <- plogis(predict(logitMod, TEST)) # predicted scores
+    # ...same as... predicted <- predict(logitMod, newdata = test, type = "response") 
+    predicted <- factor(ifelse(predict(logitMod, TEST) > 0.5, "cxc", "cc"))
+        #--
+        # library(pROC)
+        # plot.roc(test$class, predicted)
+        #--
+    
+    # make confusion matrix, get accuracy
+    con.mat <- caret::confusionMatrix(as.factor(predicted), as.factor(TEST[,"class"]))
+    acc <- con.mat$overall[[1]] # accuracy; run single bracket to confirm: con.mat$overall[1]
+        # sanity check:
+        # temp <- cbind(data.frame(test_preds = predicted, test_actual = test$class))
+        # temp <- temp %>% mutate(same = case_when( (test_preds == test_actual) ~ "yes")) 
+    acc <- as.data.frame(acc)
+    acc$motif <- paste(i)
+    results <- rbind(results, acc)
+    rm(logitMod, predicted, con.mat, acc, fmla)
+  }
+  
+  results <- results %>% arrange(desc(acc))
+  return(results)
+  rm(results)
+}
+
+LogResScoreParalogCK <- function(TRAIN){
+  results <- data.frame()
+  
+  test.master <- read.csv("data/sequence/chemokine/alignment_csv/ALL_para_df.csv")
+  #test.master <- subset(test.master, grepl("human", test.master$seq))
+  map.class <- test.master %>% dplyr::select(protein, class)
+  test.master$class <- as.character(test.master$class)
+  protein.names <- test.master$protein
+  protein.names <- as.character(protein.names)
+  #test.master$class <- as.character(test.master$class)
+  
+  test.master <- test.master %>% mutate(class = case_when(
+    class == "non" ~ "cc",
+    class != "non" ~ class
+  ))
+  
+  #--
+  # j <- "ccl23"
+  # i <- "NTc.Cm46"
+  # TRAIN <- train
+  #--
+  
+  for(j in protein.names){
+    print(j)
+    test <- test.master %>% filter(protein == j)
+    test <- test %>% dplyr::select(-protein, -seq)
+    
+    for(i in names(TRAIN)[2:ncol(TRAIN)]){
+      
+      # (1) MAKE MODEL
+      # see http://r-statistics.co/Logistic-Regression-With-R.html
+      fmla <- as.formula(paste0("class ~ ", i))
+      logitMod <- glm(fmla, data=TRAIN, family=binomial(link="logit"))
+      
+      # (2) REMOVE ROWS FROM "TEST" CONTAINING FACTORS NOT IN "TRAIN"
+      cmd <- noquote(paste0("factors.in.train <- c(logitMod$xlevels$", i, ")"))
+      eval(parse(text = cmd))
+      test <- test %>% filter(test[,i] %in% c(factors.in.train))
+      
+      # (3) EVALUATE MODEL ON "TEST"
+      predicted <- plogis(predict(logitMod, test)) # predicted scores
+      
+      # (4) WRITE SCORE TO DF
+      ifelse(nrow(test) == 0, predicted <- NA, predicted <- predicted) 
+      # key override in event that TRAIN doesn't have TEST AA
+      # above code removes test set, but then predicted makes an empty variable
+      # that throws error in next line when adding to df; this subs "NA" in that case
+      df <- as.data.frame(predicted)
+      df$position <- paste(i)
+      df$protein <- paste(j)
+      results <- rbind(results, df)
+      rm(logitMod, predicted, df)
+    }
+    rm(test)
+  }
+  colnames(results)[1] <- c("cc_cxc")
+  results$class <- map.class$class[match(unlist(results$protein), map.class$protein)]
+  return(results)
+  rm(results)
+}
+
+LogResScoreParalogClassA <- function(TRAIN){
+  results <- data.frame()
+  
+  test.master <- read.csv("data/sequence/gpcr/alignment_csv/ALL_classa_df.csv")
+  #test.master <- subset(test.master, grepl("human", test.master$seq))
+  map.class <- test.master %>% dplyr::select(protein, class)
+  test.master$class <- as.character(test.master$class)
+  protein.names <- test.master$protein
+  protein.names <- as.character(protein.names)
+  #test.master$class <- as.character(test.master$class)
+  
+  test.master <- test.master %>% mutate(class = case_when(
+    class == "non" ~ "cc",
+    class != "non" ~ class
+  ))
+  
+  #--
+  # j <- "ackr3"
+  # i <- "gnNTr.Cm3"
+  # TRAIN <- train
+  #--
+  
+  for(j in protein.names){
+    print(j)
+    test <- test.master %>% filter(protein == j)
+    test <- test %>% dplyr::select(-protein, -seq)
+    
+    for(i in names(TRAIN)[2:ncol(TRAIN)]){
+      
+      # (1) MAKE MODEL
+      # see http://r-statistics.co/Logistic-Regression-With-R.html
+      fmla <- as.formula(paste0("class ~ ", i))
+      logitMod <- glm(fmla, data=TRAIN, family=binomial(link="logit"))
+      
+      # (2) REMOVE ROWS FROM "TEST" CONTAINING FACTORS NOT IN "TRAIN"
+      cmd <- noquote(paste0("factors.in.train <- c(logitMod$xlevels$", i, ")"))
+      eval(parse(text = cmd))
+      test <- test %>% filter(test[,i] %in% c(factors.in.train))
+      
+      # (3) EVALUATE MODEL ON "TEST"
+      predicted <- plogis(predict(logitMod, test)) # predicted scores
+      
+      # (4) WRITE SCORE TO DF
+      ifelse(nrow(test) == 0, predicted <- NA, predicted <- predicted) 
+      # key override in event that TRAIN doesn't have TEST AA
+      # above code removes test set, but then predicted makes an empty variable
+      # that throws error in next line when adding to df; this subs "NA" in that case
+      df <- as.data.frame(predicted)
+      df$position <- paste(i)
+      df$protein <- paste(j)
+      results <- rbind(results, df)
+      rm(logitMod, predicted, df)
+    }
+    rm(test)
+  }
+  colnames(results)[1] <- c("cc_cxc")
+  results$class <- map.class$class[match(unlist(results$protein), map.class$protein)]
+  return(results)
+  rm(results)
+}
+
+LogResScoreVirusCK <- function(TRAIN){
+  results <- data.frame()
+  
+  test.master <- read.csv("data/sequence/chemokine/alignment_csv/ALL_virus_df.csv")
+  #test.master <- subset(test.master, grepl("human", test.master$seq))
+  map.class <- test.master %>% select(protein, class)
+  test.master$class <- as.character(test.master$class)
+  protein.names <- test.master$protein
+  protein.names <- as.character(protein.names)
+  #test.master$class <- as.character(test.master$class)
+  
+  test.master <- test.master %>% mutate(class = case_when(
+    class == "non" ~ "cc",
+    class != "non" ~ class
+  ))
+  
+  for(j in protein.names){
+    print(j)
+    test <- test.master %>% filter(protein == j)
+    test <- test %>% dplyr::select(-protein, -seq)
+    
+    for(i in names(TRAIN)[2:ncol(TRAIN)]){
+      
+      # (1) MAKE MODEL
+      # see http://r-statistics.co/Logistic-Regression-With-R.html
+      fmla <- as.formula(paste0("class ~ ", i))
+      logitMod <- glm(fmla, data=TRAIN, family=binomial(link="logit"))
+      
+      # (2) REMOVE ROWS FROM "TEST" CONTAINING FACTORS NOT IN "TRAIN"
+      cmd <- noquote(paste0("factors.in.train <- c(logitMod$xlevels$", i, ")"))
+      eval(parse(text = cmd))
+      test <- test %>% filter(test[,i] %in% c(factors.in.train))
+      
+      # (3) EVALUATE MODEL ON "TEST"
+      predicted <- plogis(predict(logitMod, test)) # predicted scores
+      
+      # (4) WRITE SCORE TO DF
+      ifelse(nrow(test) == 0, predicted <- NA, predicted <- predicted) 
+      # key override in event that TRAIN doesn't have TEST AA
+      # above code removes test set, but then predicted makes an empty variable
+      # that throws error in next line when adding to df; this subs "NA" in that case
+      df <- as.data.frame(predicted)
+      df$position <- paste(i)
+      df$protein <- paste(j)
+      results <- rbind(results, df)
+      rm(logitMod, predicted, df)
+      
+    }
+    rm(test)
+  }
+  colnames(results)[1] <- c("cc_cxc")
+  results$class <- map.class$class[match(unlist(results$protein), map.class$protein)]
+  return(results)
+  rm(results)
 }
 
 MakeVariantMatrix <- function(aln, variants, allele.count=F, threeletter=T) {

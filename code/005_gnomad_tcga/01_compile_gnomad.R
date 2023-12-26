@@ -132,17 +132,13 @@ lookup$aln_pos <- 1:nrow(lookup)
 ckr.variants <- left_join(ckr.variants, lookup)
 
 # write output
-# write_csv(ck.variant.matrix, "data/variant/gnomad/processed/CK_GNOMAD_COUNTS_FREQ.csv")
-# LAST WRITTEN 20230927
-# write_csv(ck.variants, "data/variant/gnomad/processed/CK_GNOMAD_TABLE.csv")
-# write_csv(ck.variant.matrix.freq2, "data/variant/gnomad/processed/CK_GNOMAD_COUNTS_FREQ_PCT.csv")
-# LAST WRITTEN 20231204
+# write_csv(ck.variant.matrix, "data/variant/gnomad/processed/CK_GNOMAD_COUNTS_FREQ.csv") # LAST WRITTEN 20231224
+# write_csv(ck.variants, "data/variant/gnomad/processed/CK_GNOMAD_TABLE.csv") # LAST WRITTEN 20231224
+# write_csv(ck.variant.matrix.freq2, "data/variant/gnomad/processed/CK_GNOMAD_COUNTS_FREQ_PCT.csv") # LAST WRITTEN 20231224
 
-# write_csv(ckr.variant.matrix, "data/variant/gnomad/processed/CKR_GNOMAD_COUNTS_FREQ.csv")
-# LAST WRITTEN 20230927
+# write_csv(ckr.variant.matrix, "data/variant/gnomad/processed/CKR_GNOMAD_COUNTS_FREQ.csv") # LAST WRITTEN 20230927
 # write_csv(ckr.variants, "data/variant/gnomad/processed/CKR_GNOMAD_TABLE.csv")
-# write_csv(ckr.variant.matrix.freq2, "data/variant/gnomad/processed/CKR_GNOMAD_COUNTS_FREQ_PCT.csv")
-# LAST WRITTEN 20231204
+# write_csv(ckr.variant.matrix.freq2, "data/variant/gnomad/processed/CKR_GNOMAD_COUNTS_FREQ_PCT.csv") # LAST WRITTEN 20231204
 
 # rm(ck.variants, ckr.variants, ck.variant.matrix, ckr.variant.matrix,
 #    ck.table, ckr.table)

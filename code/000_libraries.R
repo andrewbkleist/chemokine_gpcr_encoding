@@ -14,4 +14,5 @@ library(igraph) # graph networks in R
 library(networkD3) #graph networks in R
 #--
 library(rstatix) # allows "piped"/dplyr friendly stats
+library(caret) # used for confusion matrix in subfamily scoring
 

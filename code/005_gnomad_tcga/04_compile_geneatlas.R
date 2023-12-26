@@ -138,6 +138,6 @@ ccr_biobank_aln <- ccr_biobank_aln %>%
   
 
 # write
-write_csv(ccl_biobank_aln, "data/variant/geneatlas/processed/CK_GENEATLAS.csv")
-write_csv(ccr_biobank_aln, "data/variant/geneatlas/processed/CKR_GENEATLAS.csv")
+# write_csv(ccl_biobank_aln, "data/variant/geneatlas/processed/CK_GENEATLAS.csv") # WRITTEN 2023.12.25
+# write_csv(ccr_biobank_aln, "data/variant/geneatlas/processed/CKR_GENEATLAS.csv")
 
