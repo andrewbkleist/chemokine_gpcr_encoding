@@ -100,5 +100,5 @@ ckr.master <- left_join(ckr.master, aln)
 rm(aln)
 
 # write csv
-# write_csv(ckr.master, "data/integrated/CKR_CONS_CCCXC_SNP_CAN.csv") # LAST WRITTEN 20230930
+# write_csv(ckr.master, "data/integrated/CKR_CONS_CCCXC_SNP_CAN.csv") # LAST WRITTEN 20231226
 rm(ckr.master)

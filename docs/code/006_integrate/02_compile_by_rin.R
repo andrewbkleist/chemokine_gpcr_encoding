@@ -325,5 +325,6 @@ rin <- rin %>%
          cancer_mut_count_ck, cancer_mut_count_ckr)
 
 # write
-# write_csv(rin, "data/integrated/RIN_CONS_CLASS.csv") # LAST WRITTEN 20231225
+# write_csv(rin, "data/integrated/RIN_CONS_CLASS.csv") # LAST WRITTEN 20231226
+
 

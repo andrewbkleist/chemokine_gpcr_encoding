@@ -43,7 +43,7 @@ rm(train)
 scr <- bind_rows(scoreLR.1, scoreLR.2, scoreLR.3)
 scr <- scr %>% group_by(position, protein) %>% mutate(mean = mean(cc_cxc), sd = sd(cc_cxc)) %>% ungroup()
 
-write_csv(scr, "03_ckr_seq/output/CKR_CLASSA_LOGISTIC_REGRESSION_ACCURACY_N3.csv")
+# write_csv(scr, "data/sequence/gpcr/processed/CKR_CLASSA_LOGISTIC_REGRESSION_ACCURACY_N3.csv") # 20231226
 # rm(scoreLR.1, scoreLR.2, scoreLR.3)
 # rm(train, data)
 
