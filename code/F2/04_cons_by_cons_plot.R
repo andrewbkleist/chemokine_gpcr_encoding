@@ -24,8 +24,8 @@ rin %>%
 # our alignment; this is due to D97 being relabeled as 2x67 in updated GPCRdb 
 # alignment but unlabeled in the original GPCRdb alignment. Note that this 
 # corresponds to ECL1.1 in CGN scheme here.
-# 2x67 and not ECL1.1 was assigned since CCL15-CCR1 complex was added recently 
-# and after initial CGN assignments were made using the "old" GPCRdb numbering 
+# 2x67 and not ECL1.1 was assigned since CCL15-CCR1 complex was added  
+# after initial CGN assignments were made using the "old" GPCRdb numbering 
 # scheme; regardless of name this is a structurally-non-equivalent position
 # like the 4x65-45x50 (not inclusive) positions
 

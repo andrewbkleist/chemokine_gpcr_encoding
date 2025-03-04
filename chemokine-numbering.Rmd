@@ -97,7 +97,5 @@ names(coldefs) <- numcols
 reactable(data, filterable = TRUE, defaultPageSize = 46,
           columns = coldefs)
 
-
-
 ```
 

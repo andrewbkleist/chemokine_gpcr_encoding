@@ -37,22 +37,23 @@ shared.cons <- rin.unique %>% filter(cc >2 &  cxc > 1)
   # RESULT:
   # (1) CC-specific consensus contacts: 
   cc.cons
-  # - NTc.Cm3	1x24
-  # - NTc.Cm3	1x28
-  # - NTc.Cm4	1x28
-  # - b1b2.6	45x51
-  # - b1b2.9	5x36
-  # - b1b2.10	5x36
-  # - (also b1b2.16 ECL2.Cp6)
+  # - B1.7         ECL2.Cp3
+  # - NTc.Cm3      1x24
+  # - NTc.Cm3      1x28
+  # - NTc.Cm4      1x28
+  # - b1b2.10      5x36
+  # - b1b2.16      5x32
+  # - b1b2.16      ECL2.Cp6
+  # - b1b2.4       ECL2.Cp3
+  # - b1b2.6       45x51
+  # - b1b2.9       5x32
+  # - b1b2.9       5x36
   # (2) CXC-specific consensus contacts: 
   cxc.cons
-  # - NTc.Cm1	6x58
-  # - NTc.Cm1	6x62
-  # - NTc.Cm1	7x27
-  # - NTc.Cm3	6x58
-  # - NTc.Cm3	6x62
-  # - NTc.Cm3	7x34
-  # - (also b1b2.7 ECL2.Cp6)
+  # - NTc.Cm1      6x58
+  # - NTc.Cm1      7x27
+  # - NTc.Cm3      6x58
+  # - NTc.Cm3      7x34
   # (3) Shared consensus contacts:
   shared.cons  
   # cxb1.1 7x27
@@ -94,11 +95,13 @@ shared.cons <- rin.unique %>% filter(cc >2 & cxc > 1)
   # RESULT:
   # (1) CC-specific consensus contacts: 
   cc.cons
-  # - NTc.Cm1	1x22
-  # - b1b2.12 5x36
-  # - (also b3h.2 ECL2.Cp6)
+  # - NTc.Cm1      1x22
+  # - b1b2.12      5x32
+  # - b1b2.12      5x36
+  # - b3h.2        ECL2.Cp6
   # (2) CXC-specific consensus contacts: 
   cxc.cons
+  # - CX.1 7x27
   # - CX.4 1x22
   # (3) Shared consensus contacts:
   shared.cons  

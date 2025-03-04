@@ -16,7 +16,7 @@ ck %>%
   stat_summary(fun.y=median, geom="point", shape=23, size=2) +
   theme_minimal()
 
-# ggsave(filename = "ck_ortholog_cons.pdf", 
+# ggsave(filename = "ck_ortholog_cons.pdf",
 #        plot = last_plot(), path = "output/F4S1/",
 #        width = 4,
 #        height = 3)
@@ -34,7 +34,7 @@ ckr %>%
   stat_summary(fun.y=median, geom="point", shape=23, size=2) +
   theme_minimal()
 
-# ggsave(filename = "ckr_ortholog_cons.pdf", 
+# ggsave(filename = "ckr_ortholog_cons.pdf",
 #        plot = last_plot(), path = "output/F4S1/",
 #        width = 4,
 #        height = 3)
