@@ -32,6 +32,7 @@ rm(pos, seq, group1, group2, p1, p2)
 #        width = 3,
 #        height = 7)
 
+# Manually saved - issue with ggsave and ggseqlogo/gridextra
 
 # (2) CHEMOKINE ----------------------------------------------------------------
 # define tier2 sequence positions
@@ -63,4 +64,4 @@ rm(pos, seq, group1, group2, p1, p2)
 #        width = 3,
 #        height = 7)
   
-  
+# Manually saved - issue with ggsave and ggseqlogo/gridextra

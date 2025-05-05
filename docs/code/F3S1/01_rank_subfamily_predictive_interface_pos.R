@@ -31,10 +31,10 @@ temp <- ck  %>%
   filter(motif %in% interface) %>% unique()
 paste0("There are ", nrow(temp), " chemokine subfamily-predictive positions at the chemokine-GPCR interface")  
 
-# ggsave(filename = "chemokine_top_subfamily.pdf", 
-#        plot = last_plot(), path = "output/F3S1/",
-#        width = 3,
-#        height = 8)
+ggsave(filename = "chemokine_top_subfamily.pdf",
+       plot = last_plot(), path = "output/F3S1/",
+       width = 3,
+       height = 8)
   
 # RECEPTOR
 ckr <- read_csv("data/sequence/gpcr/processed/CKR_LOGISTIC_REGRESSION_ACCURACY_N3.csv") %>% 
@@ -66,7 +66,7 @@ temp <- ckr %>%
   filter(motif %in% interface) %>% unique()
 paste0("There are ", nrow(temp), " chemokine subfamily-predictive positions at the chemokine-GPCR interface")  
 
-# ggsave(filename = "receptor_top_subfamily.pdf", 
+# ggsave(filename = "receptor_top_subfamily.pdf",
 #        plot = last_plot(), path = "output/F3S1/",
 #        width = 3,
 #        height = 8)
