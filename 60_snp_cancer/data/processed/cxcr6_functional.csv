@@ -1,0 +1,7 @@
+mutant,assay,value,error
+e3q,pct_wt_surface_expression,28.6,5.6
+e3q,pct_wt_binding,91.4,40
+e3q,pct_wt_adhesion,94.4,10
+wt,pct_wt_surface_expression,100,
+wt,pct_wt_binding,100,
+wt,pct_wt_adhesion,100,

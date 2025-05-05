@@ -1,0 +1,15 @@
+source_gnccn,target_gnccn,type
+NTc.Cm3,1x28,cc
+CX.1,NTr.Cm1,cc
+CX.1,1x22,cc
+b1b2.12,5x36,cc
+b1b2.13,ECL3.Cm2,cc
+NTc.Cm3,6x58,cxc
+NTc.Cm3,7x34,cxc
+NTc.Cm1,6x62,cxc
+NTc.Cm1,7x27,cxc
+CX.4,NTr.Cm1,cxc
+CX.4,1x22,cxc
+cxb1.6,NTr.Cm5,cxc
+B1.1,NTr.Cm7,cxc
+b2b3.4,NTr.Cm7,cxc
